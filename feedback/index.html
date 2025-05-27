@@ -264,7 +264,7 @@
 
   <div class="ashes-container">
     <div class="ashes-logo">
-      <img src="https://raw.githubusercontent.com/Aryan-Techie/ashes/main/logo/icon-64x64.png" alt="Ashes Logo" width="64" height="64">
+      <img src="https://raw.githubusercontent.com/aroice-hq/ashes/main/extension-assets/flame.png" alt="Ashes Logo" width="64" height="64">
     </div>
     
     <h1>Ashes Feedback</h1>
@@ -293,19 +293,17 @@
             <input type="email" id="feedback-email" name="entry.1066815113" placeholder="For us to follow up if needed">
           </div>
         </div>
-        
-        <div class="feedback-actions">
+          <div class="feedback-actions">
           <button type="submit" id="send-feedback" class="feedback-btn primary">Send Feedback</button>
-          <a href="javascript:history.back()" class="back-btn">← Back to Ashes</a>
+          <a href="chrome://newtab" class="back-btn" target="_blank">← Back to Ashes</a>
         </div>
       </form>
     </div>
-    
-    <div id="confirmation-message" class="confirmation-message">
+      <div id="confirmation-message" class="confirmation-message">
       <div class="confirmation-icon">✓</div>
       <h2>Feedback Sent</h2>
       <p>Thank you for helping make Ashes better. Your feedback has been received.</p>
-      <a href="javascript:history.back()" class="back-btn">← Back to Ashes</a>
+      <a href="chrome://newtab" class="back-btn" target="_blank">← Back to Ashes</a>
     </div>
   </div>
 
@@ -357,23 +355,26 @@
         return;
       }
       
-      const form = event.target;
-      const formData = new FormData(form);
+      // Create an iframe to submit the form
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
       
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors'
-      })
-      .then(() => {
-        // Hide form and show confirmation
+      // Configure the form for iframe submission
+      const form = event.target;
+      form.target = 'hidden_iframe';
+      form.method = 'POST';
+      form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdrxTy1uQS5np4MCEIoNMiyu9aMPkJFbukiKfLerRvp7adCEA/formResponse';
+      
+      // Submit the form
+      form.submit();
+      
+      // Show confirmation message after a short delay
+      setTimeout(() => {
         document.getElementById('feedback-form-container').style.display = 'none';
         document.getElementById('confirmation-message').classList.add('active');
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting your feedback. Please try again.');
-      });
+      }, 1000);
     });
   </script>
 </body>
