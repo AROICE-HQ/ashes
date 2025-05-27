@@ -269,13 +269,12 @@
     
     <h1>Ashes Feedback</h1>
     <p>Your thoughts help make Ashes better.<br>Please share any suggestions, ideas, or issues you've encountered.</p>
-    
-    <div id="feedback-form-container" class="feedback-form-container">
-      <form id="feedback-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdrxTy1uQS5np4MCEIoNMiyu9aMPkJFbukiKfLerRvp7adCEA/formResponse" method="post">
+      <div id="feedback-form-container" class="feedback-form-container">
+      <form id="feedback-form">
         <div class="feedback-form">
           <div class="form-group">
             <label for="feedback-type">Feedback Type</label>
-            <select id="feedback-type" name="entry.1554078251">
+            <select id="feedback-type">
               <option value="suggestion">Suggestion</option>
               <option value="bug">Bug Report</option>
               <option value="feature">Feature Request</option>
@@ -285,25 +284,23 @@
           
           <div class="form-group">
             <label for="feedback-message">Your Message</label>
-            <textarea id="feedback-message" name="entry.505703690" rows="5" placeholder="Tell us what you think..."></textarea>
+            <textarea id="feedback-message" rows="5" placeholder="Tell us what you think..."></textarea>
           </div>
           
           <div class="form-group">
             <label for="feedback-email">Email (Optional)</label>
-            <input type="email" id="feedback-email" name="entry.1066815113" placeholder="For us to follow up if needed">
+            <input type="email" id="feedback-email" placeholder="For us to follow up if needed">
           </div>
-        </div>
-          <div class="feedback-actions">
+        </div>          <div class="feedback-actions">
           <button type="submit" id="send-feedback" class="feedback-btn primary">Send Feedback</button>
-          <a href="chrome://newtab" class="back-btn" target="_blank">← Back to Ashes</a>
+          <a href="#" id="back-to-ashes" class="back-btn">← Back to Ashes</a>
         </div>
       </form>
-    </div>
-      <div id="confirmation-message" class="confirmation-message">
+    </div>      <div id="confirmation-message" class="confirmation-message">
       <div class="confirmation-icon">✓</div>
       <h2>Feedback Sent</h2>
       <p>Thank you for helping make Ashes better. Your feedback has been received.</p>
-      <a href="chrome://newtab" class="back-btn" target="_blank">← Back to Ashes</a>
+      <a href="#" id="back-to-ashes-confirmation" class="back-btn">← Back to Ashes</a>
     </div>
   </div>
 
@@ -373,13 +370,38 @@
         // Show confirmation message
         document.getElementById('feedback-form-container').style.display = 'none';
         document.getElementById('confirmation-message').classList.add('active');
-      })
-      .catch(error => {
+      })      .catch(error => {
         console.error('Error submitting form:', error);
         // Still show the confirmation message to improve UX even if there's an error
         document.getElementById('feedback-form-container').style.display = 'none';
         document.getElementById('confirmation-message').classList.add('active');
       });
+    });
+    
+    // Handle "Back to Ashes" links
+    document.getElementById('back-to-ashes').addEventListener('click', function(event) {
+      event.preventDefault();
+      window.close(); // Try to close the window first (works in some contexts)
+      
+      // For browsers that don't allow window.close(), try to redirect to parent extension
+      // or go back to previous page if this is embedded in the extension
+      if (window.history.length > 1) {
+        window.history.back();
+      } else if (window.parent && window.parent !== window) {
+        window.parent.postMessage('closeAshesModal', '*');
+      }
+    });
+    
+    // Same functionality for confirmation message link
+    document.getElementById('back-to-ashes-confirmation').addEventListener('click', function(event) {
+      event.preventDefault();
+      window.close();
+      
+      if (window.history.length > 1) {
+        window.history.back();
+      } else if (window.parent && window.parent !== window) {
+        window.parent.postMessage('closeAshesModal', '*');
+      }
     });
   </script>
 </body>
