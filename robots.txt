@@ -1,27 +1,21 @@
 User-agent: *
 Allow: /
-Disallow: /assets/screenshots/
 Sitemap: https://ashes.aroice.in/sitemap.xml
 
 # Allow all web crawlers access to most content
 User-agent: Googlebot
 Allow: /
-Disallow: /assets/screenshots/
 
 User-agent: Bingbot
 Allow: /
-Disallow: /assets/screenshots/
 
 User-agent: Slurp
 Allow: /
-Disallow: /assets/screenshots/
 
 User-agent: DuckDuckBot
 Allow: /
-Disallow: /assets/screenshots/
 
 # Set crawl delay for demanding bots
 User-agent: Yandex
 Crawl-delay: 10
 Allow: /
-Disallow: /assets/screenshots/

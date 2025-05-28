@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Page Not Found | Ashes - Memento Mori New Tab</title>  
+  <meta name="title" content="Page Not Found | Ashes - Memento Mori New Tab">
+  <meta name="description" content="The page you're looking for has turned to ashes. Return to our memento mori new tab extension.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="author" content="Aryan Techie (AROICE)">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo/icon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/logo/icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/icon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/logo/icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/logo/icon-96x96.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/logo/icon-128x128.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="assets/logo/icon-256x256.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/logo/icon-512x512.png">
+  
+  <!-- Fonts and Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  
+  <style>
+    /* 404 Page Specific Styles */
+    .error-number {
+      font-size: 8rem;
+      font-weight: bold;
+      color: var(--accent-primary);
+      margin-bottom: 0;
+      opacity: 0.8;
+      text-shadow: 0 0 15px var(--accent-secondary);
+      animation: flicker 4s infinite alternate;
+      position: relative;
+    }
+    
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 0 0 15px var(--accent-secondary);
+        opacity: 0.8;
+      }
+      20%, 24%, 55% {
+        text-shadow: none;
+        opacity: 0.5;
+      }
+    }
+    
+    .error-title {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    @keyframes flip {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+      100% { transform: rotate(180deg); }
+    }
+    
+    .ashes-container {
+      position: relative;
+      width: 200px;
+      height: 100px;
+      margin: 2rem auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    
+    .ashes-pile {
+      width: 120px;
+      height: 30px;
+      background: linear-gradient(transparent, var(--accent-primary));
+      border-radius: 50%;
+      position: relative;
+      opacity: 0.6;
+    }
+    
+    .ash-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0;
+      animation: fall 3s infinite;
+    }
+    
+    .ash-particle:nth-child(1) {
+      left: 20%;
+      animation-delay: 0.2s;
+    }
+    
+    .ash-particle:nth-child(2) {
+      left: 50%;
+      animation-delay: 0.5s;
+    }
+    
+    .ash-particle:nth-child(3) {
+      left: 80%;
+      animation-delay: 0.8s;
+    }
+    
+    @keyframes fall {
+      0% {
+        top: -50px;
+        opacity: 1;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        top: 0;
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+    
+    .quote {
+      font-style: italic;
+      margin: 2rem 0;
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .secondary-button {
+      background: var(--card-bg);
+      color: var(--accent-primary);
+      border: 2px solid var(--accent-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .secondary-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <a href="/" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+          <img src="assets/logo/icon-128x128.png" alt="Ashes Logo">
+          <span class="logo-text">Ashes</span>
+        </a>
+      </div>
+      <div class="theme-circle" id="theme-toggle">
+        <i id="theme-icon" class="fas fa-sun"></i>
+      </div>
+    </header>
+    
+    <div class="hero">
+      <div class="ashes-container">
+        <div class="ash-particle"></div>
+        <div class="ash-particle"></div>
+        <div class="ash-particle"></div>
+        <div class="ashes-pile"></div>
+      </div>
+      
+      <h1 class="error-number">404</h1>
+      <h2 class="error-title">Page has turned to ashes</h2>
+      
+      <p class="tagline">The page you're looking for has vanished<br>like all things do with time.</p>
+      
+      <div class="hourglass">
+        <img src="assets/hourglass.png" width="70px">
+      </div>
+      
+      <p class="quote">"Remember that you are dust, and to dust you shall return. <br>Make use of your time while you have it."</p>
+      
+      <div class="action-buttons">
+        <a href="/" class="cta-button">
+          <i class="fas fa-home"></i> Return Home
+        </a>
+        <a href="https://chromewebstore.google.com/detail/ashes-new-tab/your-extension-id" class="secondary-button" target="_blank">
+          <i class="fas fa-puzzle-piece"></i> Get Extension
+        </a>
+      </div>
+    </div>
+    
+    <footer>          
+      <div class="social-links">            
+        <a href="https://github.com/Aryan-Techie" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/aryantechie" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/aryantechie" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://youtube.com/@aroice" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="mailto:admin@aroice.in" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      
+      <div class="footer-links">
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+        <a href="/feedback/">Feedback</a>
+      </div>
+      <p class="made-with-love">Made with 💛 by <a href="https://me.aroice.in" target="_blank">Aryan Techie</a><br class="mobile-break"> &copy; <span id="year"></span> <a href="https://aroice.in" target="_blank">AROICE</a></p>
+    </footer>
+  </div>
+  
+  <script>
+    // Update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (themeToggle) {
+      // Check saved preference
+      const savedTheme = localStorage.getItem('ashes-theme');
+      
+      // Check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      // Set initial theme
+      let isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+      updateTheme(isDark);
+      
+      // Toggle theme on click
+      themeToggle.addEventListener('click', () => {
+        isDark = !isDark;
+        updateTheme(isDark);
+        localStorage.setItem('ashes-theme', isDark ? 'dark' : 'light');
+      });
+    }
+      
+    function updateTheme(isDark) {
+      if (isDark) {
+        document.body.classList.remove('theme-light');
+        if (themeIcon) themeIcon.className = 'fas fa-sun';
+      } else {
+        document.body.classList.add('theme-light');
+        if (themeIcon) themeIcon.className = 'fas fa-moon';
+      }
+    }
+  </script>
+</body>
+</html>
