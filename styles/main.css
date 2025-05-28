@@ -252,6 +252,17 @@ footer {
   text-decoration: none;
 }
 
+/* Mobile copyright break - only visible on mobile devices */
+.mobile-break {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-break {
+    display: inline;
+  }
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
