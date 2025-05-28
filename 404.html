@@ -63,66 +63,7 @@
       50% { transform: rotate(180deg); }
       100% { transform: rotate(180deg); }
     }
-    
-    .ashes-container {
-      position: relative;
-      width: 200px;
-      height: 100px;
-      margin: 2rem auto;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    
-    .ashes-pile {
-      width: 120px;
-      height: 30px;
-      background: linear-gradient(transparent, var(--accent-primary));
-      border-radius: 50%;
-      position: relative;
-      opacity: 0.6;
-    }
-    
-    .ash-particle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background-color: var(--accent-primary);
-      border-radius: 50%;
-      opacity: 0;
-      animation: fall 3s infinite;
-    }
-    
-    .ash-particle:nth-child(1) {
-      left: 20%;
-      animation-delay: 0.2s;
-    }
-    
-    .ash-particle:nth-child(2) {
-      left: 50%;
-      animation-delay: 0.5s;
-    }
-    
-    .ash-particle:nth-child(3) {
-      left: 80%;
-      animation-delay: 0.8s;
-    }
-    
-    @keyframes fall {
-      0% {
-        top: -50px;
-        opacity: 1;
-      }
-      80% {
-        opacity: 0.8;
-      }
-      100% {
-        top: 0;
-        opacity: 0;
-        transform: scale(0.5);
-      }
-    }
-    
+
     .quote {
       font-style: italic;
       margin: 2rem 0;
@@ -130,25 +71,36 @@
       text-align: center;
       line-height: 1.5;
     }
-    
-    .action-buttons {
+      .action-buttons {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-top: 2rem;
       flex-wrap: wrap;
       justify-content: center;
     }
     
+    /* Override main.css button styles for 404 page */
+    .cta-button {
+      min-width: 180px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    
     .secondary-button {
+      min-width: 180px;
       background: var(--card-bg);
       color: var(--accent-primary);
       border: 2px solid var(--accent-primary);
-      padding: 0.8rem 1.5rem;
+      padding: 1rem 1.5rem;
       border-radius: 2rem;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
@@ -190,8 +142,7 @@
       </div>
       
       <p class="quote">"Remember that you are dust, and to dust you shall return. <br>Make use of your time while you have it."</p>
-      
-      <div class="action-buttons">
+        <div class="action-buttons">
         <a href="/" class="cta-button">
           <i class="fas fa-home"></i> Return Home
         </a>
