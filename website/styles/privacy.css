@@ -1,0 +1,131 @@
+/* Privacy Policy page specific styles */
+.privacy-content {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgba(30, 30, 30, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.last-updated {
+  color: #aaa;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.privacy-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.privacy-section:last-child {
+  border-bottom: none;
+  margin-bottom: 1rem;
+}
+
+.privacy-section h2 {
+  margin-bottom: 1rem;
+  color: #ff6b6b;
+  font-size: 1.5rem;
+}
+
+.privacy-list {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+.privacy-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.contact-link {
+  color: #ff6b6b;
+  text-decoration: none;
+  border-bottom: 1px dashed;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.contact-link:hover {
+  color: #ff9999;
+  border-bottom: 1px solid;
+}
+
+.return-link {
+  display: inline-block;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 107, 107, 0.2);
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.return-link a {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.return-link:hover {
+  background-color: rgba(255, 107, 107, 0.3);
+}
+
+/* Animation for sections */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.privacy-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.privacy-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .privacy-content {
+    padding: 1.5rem;
+    margin: 1.5rem 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .privacy-section {
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .privacy-list {
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+  }
+  
+  .return-link {
+    margin-top: 1.5rem;
+  }
+}
