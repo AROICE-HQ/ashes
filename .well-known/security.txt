@@ -1,0 +1,5 @@
+Contact: mailto:admin@aroice.in
+Expires: 2026-05-29T12:00:00.000Z
+Preferred-Languages: en
+Canonical: https://ashes.aroice.in/.well-known/security.txt
+Policy: https://ashes.aroice.in/security-policy

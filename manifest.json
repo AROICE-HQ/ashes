@@ -1,0 +1,23 @@
+{
+  "name": "Ashes - Memento Mori New Tab",
+  "short_name": "Ashes",
+  "description": "Transform each new tab into a reminder of life's brevity. A memento mori that helps you live with intention.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#ffb347",
+  "icons": [
+    {
+      "src": "assets/logo/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

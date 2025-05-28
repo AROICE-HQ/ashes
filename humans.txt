@@ -1,0 +1,14 @@
+/* TEAM */
+Developer: Aryan Jangra (Aryan Techie)
+Contact: admin@aroice.in
+Twitter: @aryantechie
+GitHub: https://github.com/Aryan-Techie
+Location: India
+
+/* SITE */
+Last update: 2025-05-29
+Language: English
+Doctype: HTML5
+Tools: Visual Studio Code, HTML5, CSS3, JavaScript
+IDE: Visual Studio Code
+Hosting: GitHub Pages
