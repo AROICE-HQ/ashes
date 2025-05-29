@@ -72,7 +72,8 @@ async function detectBrowserAndUpdateButton() {
   if (!browserCTA || !browserIcon || !browserText) return;
   
   // Default store URL
-  let storeURL = "https://chromewebstore.google.com/detail/ashes-new-tab/idjabgmogbniabagofffdgkohdeemiim";
+  let storeURL = "https://chromewebstore.google.com/detail/Ashes%20-%20New%20Tab/ldjabgmogbniabagofffdgkohdeemiim";
+  
   
   const userAgent = navigator.userAgent;
   const isBrave = await isBraveBrowser();
@@ -86,7 +87,7 @@ async function detectBrowserAndUpdateButton() {
   else if (userAgent.indexOf("Edg") !== -1) {
       browserText.textContent = "Add to Edge";
       browserIcon.className = "fab fa-edge";
-      storeURL = "https://microsoftedge.microsoft.com/addons/detail/ashes-new-tab/jaaaiofhkekngalfikbpidbgolncncao";
+      storeURL = "https://chromewebstore.google.com/detail/Ashes%20-%20New%20Tab/ldjabgmogbniabagofffdgkohdeemiim";
     }
     // Vivaldi
     else if (userAgent.indexOf("Vivaldi") !== -1) {
