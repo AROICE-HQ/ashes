@@ -12,8 +12,8 @@
   <a href="https://addons.mozilla.org/firefox/addon/ashes-new-tab">
     <img src="https://img.shields.io/badge/Firefox-Addon-FF7139?style=for-the-badge&logo=firefox-browser" alt="Firefox Addon">
   </a>
-  <a href="https://github.com/Aryan-Techie/ashes">
-    <img src="https://img.shields.io/github/stars/Aryan-Techie/ashes?style=for-the-badge" alt="GitHub stars">
+  <a href="https://github.com/AROICE-HQ/ashes">
+    <img src="https://img.shields.io/github/stars/AROICE-HQ/ashes?style=for-the-badge" alt="GitHub stars">
   </a>
 </p>
 
@@ -90,7 +90,7 @@ Find:
 - 🐞 Bug Fixes
 - 📈 Improvements
 
-All under the [Releases Section](https://github.com/Aryan-Techie/ashes/releases).
+All under the [Releases Section](https://github.com/AROICE-HQ/ashes/releases).
 
 ---
 
@@ -98,12 +98,7 @@ All under the [Releases Section](https://github.com/Aryan-Techie/ashes/releases)
 
 Want to improve Ashes?
 
-1. Fork the repo.
-2. Create a new branch.
-3. Commit and push changes.
-4. Open a pull request.
-
-💡 **Ideas welcome!** File issues or feature requests [here](https://github.com/Aryan-Techie/ashes/issues).
+💡 **Your Ideas are welcome!** File issues or feature requests [here](https://github.com/AROICE-HQ/ashes/issues).
 
 ---
 
@@ -153,8 +148,7 @@ If Ashes helps you live more intentionally, consider supporting:
 
 ## ✍️ Author
 
-Made with 💛 by [Aryan Techie](https://me.aroice.in)  
-🌐 [AROICE](https://aroice.in)
+Made with 💛 by [Aryan Techie](https://me.aroice.in) 🌐 [AROICE](https://aroice.in)
 
 > *"This moment is real. What will you do with it?"*
 
@@ -163,7 +157,7 @@ Made with 💛 by [Aryan Techie](https://me.aroice.in)
 ## ❓ FAQ
 
 <p>
-  <a href="https://ashes.aroice.in/feedback/">
+  <a href="https://ashes.aroice.in/faq/">
     <img src="https://img.shields.io/badge/View%20Complete-FAQ-%230099ff?style=for-the-badge&logo=questionmark" alt="FAQ Button">
   </a>
 </p>
