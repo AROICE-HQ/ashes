@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - Ashes</title>  
+  <meta name="description" content="Frequently Asked Questions about Ashes - A memento mori new tab Chrome extension.">
+  
+  <!-- Open Graph / Facebook -->  
+  <meta property="og:type" content="website">  
+  <meta property="og:url" content="https://ashes.aroice.in/faq/">
+  <meta property="og:title" content="FAQ - Ashes">
+  <meta property="og:description" content="Find answers to frequently asked questions about Ashes - A memento mori new tab Chrome extension.">
+  <meta property="og:image" content="https://ashes.aroice.in/assets/social-media/og-banner.png">
+  <meta property="og:image:alt" content="Ashes New Tab Extension Banner">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Ashes by AROICE">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://ashes.aroice.in/faq/">
+  <meta property="twitter:title" content="FAQ - Ashes">
+  <meta property="twitter:description" content="Find answers to frequently asked questions about Ashes - A memento mori new tab Chrome extension.">
+  <meta property="twitter:image" content="https://ashes.aroice.in/assets/social-media/og-banner.png">
+  <meta property="twitter:creator" content="@aryantechie">
+  <meta property="twitter:site" content="@aryantechie">
+  <meta property="twitter:image:alt" content="Ashes New Tab Extension Banner">
+  
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/faq.css">
+  <link rel="icon" type="image/png" href="../assets/logo/icon-32x32.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="../assets/logo/icon-128x128.png" alt="Ashes Logo">
+        <span class="logo-text">Ashes</span>
+      </div>
+      <div class="theme-circle" id="theme-toggle">
+        <i id="theme-icon" class="fas fa-sun"></i>
+      </div>
+    </header>
+    
+    <div class="faq-content">
+      <div class="page-header">
+        <h1>Frequently Asked Questions</h1>
+        <p class="subtitle">Find answers to common questions about Ashes</p>
+      </div>
+      
+      <!-- Search Bar -->
+      <div class="faq-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="faq-search" placeholder="Search for questions...">
+      </div>
+      
+      <!-- Category Filters -->
+      <div class="faq-categories">
+        <button class="category-button active" data-category="all">All</button>
+        <button class="category-button" data-category="general">General</button>
+        <button class="category-button" data-category="features">Features</button>
+        <button class="category-button" data-category="privacy">Privacy</button>
+        <button class="category-button" data-category="technical">Technical</button>
+        <button class="category-button" data-category="support">Support</button>
+      </div>
+      
+      <!-- No Results Message -->
+      <div id="search-no-results" class="search-no-results">
+        <p>No results found. Try a different search term or <a href="#" id="clear-search">clear your search</a>.</p>
+      </div>
+      
+      <!-- General Questions -->
+      <div class="faq-section" data-category="general">
+        <h2>General Questions</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            What is Ashes? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Ashes is a browser extension that replaces your default new tab page with a live countdown of your remaining time, based on your birthdate and expected lifespan. It serves as a "memento mori" — a reminder that life is finite, and every second matters.</p>
+            <p>Unlike typical new tab pages that can be distracting or cluttered, Ashes provides a minimalist, meaningful reminder that helps you live more intentionally and make conscious decisions about how you spend your time online.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Why is it called "Ashes"? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>The name "Ashes" refers to the ancient phrase "ashes to ashes, dust to dust" — a reminder of mortality. It symbolizes the impermanence of human life and the value of the time we have.</p>
+            <p>Just as ashes represent what remains after a fire has burned out, the extension serves as a reminder that our time is constantly burning away, encouraging us to use it wisely while it lasts.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Is Ashes meant to be depressing? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Not at all! While confronting our mortality might seem uncomfortable at first, Ashes is designed to be empowering, not depressing. By acknowledging that our time is limited, we're more likely to:</p>
+            <ul>
+              <li>Make conscious choices about how we spend our time</li>
+              <li>Prioritize what truly matters to us</li>
+              <li>Avoid wasting time on things that don't align with our values</li>
+              <li>Live more deliberately and with greater awareness</li>
+            </ul>
+            <p>Many users report that after the initial adjustment period, they find the reminder liberating and clarifying rather than negative.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Who created Ashes? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Ashes was created by Aryan Techie, founder of AROICE. It was built to help people live more deliberately in the digital age, especially given how much time we spend in browser tabs.</p>
+            <p>The project was inspired by the creator's personal need for a tool that would transform mindless browsing into moments of reflection and intentionality.</p>
+            <p>You can learn more about the creator at <a href="https://me.aroice.in" target="_blank">me.aroice.in</a> or <a href="https://aroice.in" target="_blank">aroice.in</a>.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Features Section -->
+      <div class="faq-section" data-category="features">
+        <h2>Features & Usage</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            How does Ashes calculate my remaining time? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Ashes uses your birthdate and an estimated lifespan to calculate your remaining time. The calculation follows these steps:</p>
+            <ol>
+              <li>You enter your date of birth when setting up the extension</li>
+              <li>You select an estimated lifespan (default is based on global average life expectancy, but you can customize it)</li>
+              <li>The extension calculates the difference between your projected end date and the current date/time</li>
+              <li>This remaining time is displayed in various units (years, months, days, hours, etc.)</li>
+            </ol>
+            <p>The timer updates in real-time, providing a continuous reminder of your passing moments.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I customize how Ashes looks? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, Ashes offers several customization options:</p>
+            <ul>
+              <li><strong>Light/Dark Mode:</strong> Choose between light and dark themes based on your preference</li>
+              <li><strong>Time Units:</strong> Select which units of time you want to see (years, months, days, hours, minutes, seconds)</li>
+              <li><strong>Display Options:</strong> Adjust the size and prominence of different elements</li>
+              <li><strong>Quotes:</strong> Toggle the display of philosophical quotes about time and life</li>
+            </ul>
+            <p>More customization options are planned for future updates, including custom backgrounds and color schemes.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Does Ashes work offline? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! Ashes is designed to work completely offline. Once installed, all calculations happen locally in your browser, and no internet connection is required for the core functionality.</p>
+            <p>This means your countdown will continue to work even when you're not connected to the internet, making it reliable regardless of your connection status.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I see inspirational quotes with Ashes? (Coming Soon!)<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, Ashes includes a collection of carefully selected philosophical quotes, primarily from Stoic philosophers, that complement the theme of mortality awareness and intentional living.</p>
+            <p>These quotes rotate periodically and provide additional context and perspective to the time visualization. You can enable or disable the quotes display in the extension settings.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Privacy Section -->
+      <div class="faq-section" data-category="privacy">
+        <h2>Privacy & Security</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Does Ashes collect my personal data? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>No. Ashes is designed with privacy as a core principle. The extension:</p>
+            <ul>
+              <li>Stores your birthdate and preferences <strong>locally</strong> on your device only</li>
+              <li>Does not transmit any personal information to any servers</li>
+              <li>Does not use analytics or tracking tools</li>
+              <li>Does not require any account creation or login</li>
+            </ul>
+            <p>Your data remains completely private and under your control at all times. For full details, please see our <a href="../privacy/index.html">Privacy Policy</a>.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Is my birthdate information secure? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. Your birthdate is stored using your browser's built-in local storage mechanism and never leaves your device. It's used solely to calculate your remaining time and is not accessible to anyone else, including the extension's creator.</p>
+            <p>If you ever want to remove this data, you can simply reset the extension's settings or uninstall it entirely.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            What permissions does Ashes require? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Ashes requires minimal permissions to function:</p>
+            <ul>
+              <li><strong>New Tab Override:</strong> To replace your browser's default new tab page</li>
+              <li><strong>Storage:</strong> To save your preferences locally on your device</li>
+            </ul>
+            <p>The extension does <strong>not</strong> request permissions for:</p>
+            <ul>
+              <li>Browsing history</li>
+              <li>Website data access</li>
+              <li>Network requests</li>
+              <li>Bookmarks or other browser data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Technical Section -->
+      <div class="faq-section" data-category="technical">
+        <h2>Technical Questions</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Which browsers support Ashes? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Ashes is currently available for:</p>
+            <ul>
+              <li>Google Chrome</li>
+              <li>Mozilla Firefox</li>
+              <li>Microsoft Edge</li>
+              <li>Brave Browser</li>
+              <li>Opera</li>
+              <li>Vivaldi</li>
+            </ul>
+            <p>Most Chromium-based browsers should be compatible with the Chrome version of the extension. If you're using a different browser and would like to see Ashes supported, please let us know through the <a href="../feedback/index.html">Feedback form</a>.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Does Ashes slow down my browser? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>No. Ashes is designed to be extremely lightweight and efficient. It uses minimal resources and loads instantly when you open a new tab.</p>
+            <p>The extension:</p>
+            <ul>
+              <li>Doesn't load external resources</li>
+              <li>Uses efficient time calculation algorithms</li>
+              <li>Has no background processes when not in use</li>
+              <li>Is optimized for performance</li>
+            </ul>
+            <p>You should notice no difference in your browser's performance with Ashes installed compared to the default new tab page.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I use Ashes alongside other new tab extensions? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Unfortunately, no. Browsers only allow one extension to override the new tab page at a time. If you install multiple new tab extensions, only the most recently activated one will be shown.</p>
+            <p>If you want to switch between different new tab experiences, you'll need to enable/disable the extensions as needed through your browser's extension management page.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            Is Ashes open-source? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>No, Ashes is proprietary software developed by Aryan Techie/AROICE. Its source code is not publicly available.</p>
+            <p>However, we welcome feedback and suggestions for improvements through our <a href="../feedback/index.html">Feedback form</a>.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Support Section -->
+      <div class="faq-section" data-category="support">
+        <h2>Support & Troubleshooting</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            I just installed Ashes but it's not showing up when I open a new tab. <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>If Ashes isn't appearing when you open a new tab, try these troubleshooting steps:</p>
+            <ol>
+              <li>Make sure the extension is enabled in your browser's extension menu</li>
+              <li>Check if another new tab extension is active and might be overriding Ashes</li>
+              <li>Restart your browser completely</li>
+              <li>If using Chrome, go to <code>chrome://extensions</code>, find Ashes, and confirm "Allow in Incognito" is not enabled if you're not in incognito mode</li>
+              <li>Uninstall and reinstall the extension</li>
+            </ol>
+            <p>If these steps don't resolve the issue, please contact us through the <a href="../feedback/index.html">Feedback form</a> with details about your browser and operating system.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I update my birth date or preferences? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>To update your birth date or other preferences:</p>
+            <ol>
+              <li>Open a new tab to access Ashes</li>
+              <li>Click the Menu icon in the top right corner of the screen</li>
+              <li>Access the settings panel where you can update your birth date and other preferences</li>
+              <li>Save your changes</li>
+            </ol>
+            <p>Your new settings will be applied immediately and stored locally in your browser.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I completely reset Ashes? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>To completely reset Ashes and all its stored data:</p>
+            <ol>
+              <li>You can do this either by going to the options page of extension, clicking the icon of extenion from extension list and then scroll to botoom then you will see a reset to defaults button</li>
+              <li>or simply you can just reinstall extension by chrome extensions web store</li>
+            </ol>
+            <p>This will remove all your settings and preferences, allowing you to start fresh the next time you open a new tab.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            How can I provide feedback or report an issue? <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>We welcome your feedback and are committed to improving Ashes. You can:</p>
+            <ul>
+              <li>Submit feedback through our <a href="../feedback/index.html">dedicated feedback form</a></li>
+              <li>Email us directly at <a href="mailto:admin@aroice.in">admin@aroice.in</a></li>
+              <li>Leave a review on the <a href="https://chromewebstore.google.com/detail/Ashes%20-%20New%20Tab/ldjabgmogbniabagofffdgkohdeemiim" target="_blank">Chrome Web Store</a> or <a href="https://addons.mozilla.org/firefox/addon/ashes-new-tab" target="_blank">Firefox Add-ons</a> page</li>
+            </ul>
+            <p>For bug reports, please include your browser name/version and any steps to reproduce the issue.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contact Section -->
+      <div class="contact-section">
+        <h3>Still have questions?</h3>
+        <p>We're here to help. Reach out with your question or feedback.</p>
+        <a href="../feedback/index.html" class="contact-button">Contact Us</a>
+      </div>
+    </div>
+    
+    <footer>          
+      <div class="social-links">            
+        <a href="https://github.com/Aryan-Techie" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/aryantechie" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/aryantechie" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://youtube.com/@aroice" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="mailto:admin@aroice.in" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+        <div class="footer-links">
+        <a href="../privacy/index.html">Privacy Policy</a>
+        <a href="../terms/index.html">Terms of Use</a>
+        <a href="../feedback/index.html">Feedback</a>
+        <a href="../faq/index.html" class="active">FAQ</a>
+      </div>
+      <p class="copyright"></p>
+      <p class="made-with-love">Made with 💛 by <a href="https://me.aroice.in" target="_blank">Aryan Techie</a><br class="mobile-break"><br class="mobile-break"> &copy; <span id="year"></span> <a href="https://aroice.in" target="_blank">AROICE</a></p>
+    </footer>  
+  </div>
+  
+  <!-- Back to top button -->
+  <div id="back-to-top" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+  
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/faq.js"></script>
+</body>
+</html>
