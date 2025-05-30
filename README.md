@@ -15,6 +15,9 @@
   <a href="https://github.com/AROICE-HQ/ashes">
     <img src="https://img.shields.io/github/stars/AROICE-HQ/ashes?style=for-the-badge" alt="GitHub stars">
   </a>
+  <a href="https://www.producthunt.com/posts/ashes">
+    <img src="https://img.shields.io/badge/Product%20Hunt-Featured-%23DA552E?style=for-the-badge&logo=product-hunt" alt="Product Hunt">
+  </a>
 </p>
 
 ---
