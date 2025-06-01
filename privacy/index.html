@@ -5,7 +5,14 @@
   <title>Privacy Policy - Ashes</title>  
   <meta name="description" content="Privacy Policy for Ashes - A memento mori new tab Chrome extension.">
   
-  <!-- Open Graph / Facebook -->  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+  
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">  
   <meta property="og:url" content="https://ashes.aroice.in/privacy/">
   <meta property="og:title" content="Privacy Policy - Ashes">
@@ -122,8 +129,8 @@
       <p class="made-with-love">Made with 💛 by <a href="https://me.aroice.in" target="_blank">Aryan Techie</a> &copy; <span id="year"></span> <a href="https://aroice.in" target="_blank">AROICE</a></p>
     </footer>
   </div>
-  
-  <script src="../scripts/script.js"></script>
+    <script src="../scripts/script.js"></script>
   <script src="../scripts/privacy.js"></script>
+  <script src="../scripts/security-headers.js"></script>
 </body>
 </html>
