@@ -87,7 +87,7 @@ async function detectBrowserAndUpdateButton() {
   else if (userAgent.indexOf("Edg") !== -1) {
       browserText.textContent = "Add to Edge";
       browserIcon.className = "fab fa-edge";
-      storeURL = "https://chromewebstore.google.com/detail/Ashes%20-%20New%20Tab/ldjabgmogbniabagofffdgkohdeemiim";
+      storeURL = "https://microsoftedge.microsoft.com/addons/detail/ashes-new-tab/jaaaiofhkekngalfikbpidbgolncncao";
     }
     // Vivaldi
     else if (userAgent.indexOf("Vivaldi") !== -1) {
