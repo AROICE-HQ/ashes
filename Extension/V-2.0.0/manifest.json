@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Ashes - New Tab ",
+  "short_name": "Ashes",  
+  "description": "A New Tab with advanced life expectancy calculation that helps you live with intention. Features lifestyle analysis.",
+  "version": "2.0.0",
+  "version_name": "2.0.0 Advanced Life Calculation Update",
+  "author": "Aryan Techie (https://github.com/Aryan-Techie)",
+  "homepage_url": "https://ashes.aroice.in",
+  
+  "minimum_chrome_version": "88",
+  "chrome_url_overrides": {
+    "newtab": "ashes.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },  "icons": {
+    "16": "logo/icon-16x16.png",
+    "32": "logo/icon-32x32.png",
+    "48": "logo/icon-48x48.png",
+    "64": "logo/icon-64x64.png",
+    "128": "logo/icon-128x128.png",
+    "256": "logo/icon-256x256.png",
+    "512": "logo/icon-512x512.png"
+  },
+    "permissions": ["storage", "commands"],
+  "incognito": "split",
+  "offline_enabled": true,
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [{
+    "resources": ["assets/*"],
+    "matches": ["<all_urls>"]
+  }],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },  "action": {
+    "default_title": "Ashes: A reminder that time doesn't wait",
+    "default_icon": {
+      "32": "logo/icon-32x32.png",
+      "48": "logo/icon-48x48.png",
+      "64": "logo/icon-64x64.png"
+    }
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Open Ashes Options Page"
+    }
+  }
+}

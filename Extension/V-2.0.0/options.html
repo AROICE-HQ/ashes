@@ -1,0 +1,121 @@
+<!-- Full settings page for Ashes - Added in v1.2.0 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Ashes Settings</title>
+  <link rel="stylesheet" href="options.css">
+  <link rel="icon" type="image/png" href="logo/icon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="options-container">
+    <header>
+      <div class="logo-container">
+        <!-- SVG logo will be injected here -->
+      </div>
+      <h1>Ashes Settings</h1>
+      <p class="tagline">Configure your reminder that time doesn't wait</p>
+    </header>
+    
+    <div class="options-section">
+      <h2>Personal Settings</h2>
+      <div class="option-group">
+        <label for="dob-input">Date of Birth:</label>
+        <input type="date" id="dob-input">
+      </div>
+      <div class="option-group">
+        <label for="gender-select">Gender:</label>
+        <select id="gender-select">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <label for="country-select">Country:</label>
+        <select id="country-select">
+          <option value="india">India</option>
+          <option value="us">United States</option>
+          <option value="uk">United Kingdom</option>
+          <option value="canada">Canada</option>
+          <option value="australia">Australia</option>
+          <option value="germany">Germany</option>
+          <option value="france">France</option>
+          <option value="japan">Japan</option>
+          <option value="china">China</option>
+          <option value="brazil">Brazil</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <label for="lifespan-input">Base Lifespan (years):</label>
+        <input type="number" id="lifespan-input" min="1" max="120">
+        <small class="help-text">Will be adjusted based on lifestyle factors below</small>
+      </div>
+    </div>
+    
+    <div class="options-section">
+      <h2>Display Settings</h2>
+      <div class="option-group">
+        <label for="theme-select">Theme:</label>
+        <select id="theme-select">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="minimal">Minimal</option>
+        </select>
+      </div>
+      <div class="option-group">        <label for="format-select">Time Format:</label>
+        <select id="format-select">
+          <option value="years_days_hours_minutes_seconds">Full (Years, Days, Hours, Minutes, Seconds)</option>
+          <option value="years_days_hours_minutes">Standard (Years, Days, Hours, Minutes)</option>
+          <option value="years_days">Simple (Years, Days)</option>
+          <option value="just_days">Just Days (lol to fuck user mental state mori)</option>
+        </select>
+      </div>      
+      
+      <div class="option-group checkbox-group">
+        <input type="checkbox" id="animation-toggle" class="toggle-checkbox">
+        <label for="animation-toggle">Enable animations</label>
+      </div>      <div class="option-group checkbox-group">
+        <input type="checkbox" id="notification-toggle" class="toggle-checkbox">
+        <label for="notification-toggle">Enable notifications</label>
+      </div>   
+      </div>
+      <div class="options-section">
+      <div class="option-group keyboard-shortcuts">
+        <h2>Keyboard Shortcuts</h2>
+        <div class="shortcut-container">
+          <p class="shortcut-info">Customize or disable keyboard shortcuts for quick access to Ashes</p> 
+          <br>
+          <button id="shortcut-settings-button" class="shortcut-button">Configure Shortcuts</button>
+        </div>
+      </div>
+    </div>
+      <div class="options-section">      <h2>About</h2>
+      <p>Ashes replaces your new tab with something rare - a moment of reflection. <br>
+        A live countdown, quietly reminding you: this life won't last forever.</p>
+      
+      <p>It doesn't shout. <br>
+      It doesn't distract. <br>
+      It simply tells the truth — time is burning.</p>
+
+      <p>For those who want to feel the weight of a moment. <br>
+      For those who refuse to live on autopilot.</p>
+
+      <p>Version: <span id="version-number">2.0.0</span></p>
+
+      <p>Created by <a href="https://github.com/Aryan-Techie" target="_blank">Aryan Techie</a> @ <a href="https://github.com/aroice-hq" target="_blank">AROICE</a>.</p>
+    </div>
+    
+    <div class="button-row">
+      <button id="save-button" class="primary-button">Save Settings</button>
+      <button id="reset-button" class="secondary-button">Reset to Defaults</button>
+    </div>
+
+    <div id="save-status"></div>
+  </div>
+  <script src="life-calculator.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

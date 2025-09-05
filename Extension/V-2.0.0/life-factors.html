@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Factors - Ashes</title>
+  <link rel="stylesheet" href="ashes.css">
+  <link rel="stylesheet" href="options.css">
+  <link rel="stylesheet" href="life-factors.css">
+  <link rel="icon" type="image/png" href="logo/icon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="page-header">
+      <div class="header-content">
+        <div class="header-logo">
+          <img src="assets/flame.png" alt="Ashes Logo" width="32" height="32">
+          <h1>Life Factors</h1>
+        </div>
+        <button id="back-to-main" class="back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Timer
+        </button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="section-intro">
+        <h2>Advanced Life Expectancy Factors</h2>
+        <p>Fine-tune your life expectancy calculation with detailed lifestyle and health factors. Changes are saved automatically and will update your countdown timer in real-time.</p>
+      </div>
+
+      <div class="page-layout">
+        <!-- Calculation Sidebar -->
+        <div class="calculation-sidebar">
+          <div class="factor-card calculation-display">
+            <div class="card-header">
+              <h3><i class="fas fa-calculator"></i> Current Calculation</h3>
+            </div>
+            <div class="card-content">
+              <div class="current-result">
+                <div class="result-main">
+                  <span>~<span id="current-lifespan">80</span></span>
+                  <span class="result-unit">years</span>
+                </div>
+                <div class="result-details">
+                  <div class="detail-item">
+                    <span>Your age</span>
+                    <span id="current-age">25</span>
+                  </div>
+                  <div class="detail-item">
+                    <span>Years left</span>
+                    <span>~<span id="years-remaining">55</span></span>
+                  </div>
+                </div>
+              </div>
+              <button id="recalculate-btn" class="action-btn">
+                <i class="fas fa-sync-alt"></i> Recalculate Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Factors Form -->
+        <div class="factors-main">
+          <!-- Basic Information -->
+          <div class="factor-card">
+            <div class="card-header">
+              <h3><i class="fas fa-user"></i> Basic Information</h3>
+            </div>
+            <div class="card-content">
+              <div class="form-group">
+                <label for="factor-dob">Date of Birth</label>
+                <input type="date" id="factor-dob" class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="factor-gender">Gender</label>
+                <select id="factor-gender" class="form-select">
+                  <option value="">Select gender...</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="factor-country">Country</label>
+                <select id="factor-country" class="form-select">
+                  <option value="">Select country...</option>
+                  <option value="us">🇺🇸 United States</option>
+                  <option value="uk">🇬🇧 United Kingdom</option>
+                  <option value="canada">🇨🇦 Canada</option>
+                  <option value="australia">🇦🇺 Australia</option>
+                  <option value="germany">🇩🇪 Germany</option>
+                  <option value="france">🇫🇷 France</option>
+                  <option value="japan">🇯🇵 Japan</option>
+                  <option value="india">🇮🇳 India</option>
+                  <option value="china">🇨🇳 China</option>
+                  <option value="brazil">🇧🇷 Brazil</option>
+                  <option value="other">🌏 Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health Metrics -->
+          <div class="factor-card">
+            <div class="card-header">
+              <h3><i class="fas fa-heartbeat"></i> Health Metrics</h3>
+            </div>
+            <div class="card-content">
+              <div class="form-group bmi-group">
+                <div class="bmi-inputs">
+                  <div class="input-half">
+                    <label for="factor-height">Height (cm)</label>
+                    <input type="number" id="factor-height" class="form-input" placeholder="170">
+                  </div>
+                  <div class="input-half">
+                    <label for="factor-weight">Weight (kg)</label>
+                    <input type="number" id="factor-weight" class="form-input" placeholder="70">
+                  </div>
+                </div>
+                <div class="bmi-result" id="factor-bmi-result">
+                  <span>BMI: <strong id="factor-bmi-value">--</strong></span>
+                  <span id="factor-bmi-category" class="bmi-category">--</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lifestyle Factors -->
+          <div class="factor-card">
+            <div class="card-header">
+              <h3><i class="fas fa-running"></i> Lifestyle</h3>
+            </div>
+            <div class="card-content">
+              <div class="form-group">
+                <label for="factor-fitness">Overall Fitness Level</label>
+                <select id="factor-fitness" class="form-select">
+                  <option value="">Select fitness level...</option>
+                  <option value="sedentary">Sedentary (little/no exercise)</option>
+                  <option value="light">Light (1-2 times/week)</option>
+                  <option value="moderate">Moderate (3-4 times/week)</option>
+                  <option value="active">Very Active (5+ times/week)</option>
+                  <option value="athlete">Athlete level</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-exercise-frequency">Exercise Frequency per Week</label>
+                <select id="factor-exercise-frequency" class="form-select">
+                  <option value="">Select frequency...</option>
+                  <option value="0">No exercise</option>
+                  <option value="1-2">1-2 times per week</option>
+                  <option value="3-4">3-4 times per week</option>
+                  <option value="5-6">5-6 times per week</option>
+                  <option value="7+">Daily (7+ times per week)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-exercise-type">Primary Exercise Type</label>
+                <select id="factor-exercise-type" class="form-select">
+                  <option value="">Select exercise type...</option>
+                  <option value="cardio">Cardio (running, cycling, swimming)</option>
+                  <option value="strength">Strength training (weights, resistance)</option>
+                  <option value="mixed">Mixed (cardio + strength)</option>
+                  <option value="yoga">Yoga/Flexibility/Pilates</option>
+                  <option value="sports">Sports (tennis, basketball, etc.)</option>
+                  <option value="walking">Walking/Light activities</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-exercise-duration">Average Exercise Duration</label>
+                <select id="factor-exercise-duration" class="form-select">
+                  <option value="">Select duration...</option>
+                  <option value="15-30">15-30 minutes</option>
+                  <option value="30-60">30-60 minutes</option>
+                  <option value="60-90">60-90 minutes</option>
+                  <option value="90+">90+ minutes</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-daily-steps">Daily Steps (Approximate)</label>
+                <select id="factor-daily-steps" class="form-select">
+                  <option value="">Select daily steps...</option>
+                  <option value="under-3k">Under 3,000 steps</option>
+                  <option value="3k-5k">3,000-5,000 steps</option>
+                  <option value="5k-8k">5,000-8,000 steps</option>
+                  <option value="8k-10k">8,000-10,000 steps</option>
+                  <option value="10k+">10,000+ steps</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="factor-diet">Overall Diet Quality</label>
+                <select id="factor-diet" class="form-select">
+                  <option value="">Select diet quality...</option>
+                  <option value="poor">Poor (fast food, processed)</option>
+                  <option value="average">Average (mixed diet)</option>
+                  <option value="good">Good (balanced, some organic)</option>
+                  <option value="excellent">Excellent (Mediterranean, whole foods)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-water-intake">Daily Water Intake</label>
+                <select id="factor-water-intake" class="form-select">
+                  <option value="">Select water intake...</option>
+                  <option value="under-4">Under 4 cups (32oz)</option>
+                  <option value="4-6">4-6 cups (32-48oz)</option>
+                  <option value="6-8">6-8 cups (48-64oz)</option>
+                  <option value="8+">8+ cups (64oz+)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-fruits-vegetables">Fruits & Vegetables per Day</label>
+                <select id="factor-fruits-vegetables" class="form-select">
+                  <option value="">Select servings...</option>
+                  <option value="0-1">0-1 servings</option>
+                  <option value="2-3">2-3 servings</option>
+                  <option value="4-5">4-5 servings</option>
+                  <option value="6+">6+ servings</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-processed-food">Processed Food Frequency</label>
+                <select id="factor-processed-food" class="form-select">
+                  <option value="">Select frequency...</option>
+                  <option value="daily">Daily</option>
+                  <option value="few-times-week">Few times per week</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="rarely">Rarely</option>
+                  <option value="never">Never</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-meal-regularity">Meal Regularity</label>
+                <select id="factor-meal-regularity" class="form-select">
+                  <option value="">Select pattern...</option>
+                  <option value="irregular">Irregular/skip meals</option>
+                  <option value="2-meals">2 regular meals</option>
+                  <option value="3-meals">3 regular meals</option>
+                  <option value="3-meals-snacks">3 meals + healthy snacks</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="factor-sleep">Sleep Quality</label>
+                <select id="factor-sleep" class="form-select">
+                  <option value="">Select sleep quality...</option>
+                  <option value="poor">Poor (< 6 hours, restless)</option>
+                  <option value="fair">Fair (6-7 hours, some issues)</option>
+                  <option value="good">Good (7-8 hours, mostly restful)</option>
+                  <option value="excellent">Excellent (8+ hours, deep sleep)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Habits & Stress -->
+          <div class="factor-card">
+            <div class="card-header">
+              <h3><i class="fas fa-brain"></i> Habits & Mental Health</h3>
+            </div>
+            <div class="card-content">
+              <div class="form-group">
+                <label>Smoking Status</label>
+                <div class="radio-group">
+                  <label class="radio-option">
+                    <input type="radio" name="factor-smoking" value="false"> Never smoked
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="factor-smoking" value="true"> Current smoker
+                  </label>
+                  <label class="radio-option">
+                    <input type="radio" name="factor-smoking" value="former"> Former smoker
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Smoking Details (conditional) -->
+              <div class="form-group" id="smoking-details" style="display: none;">
+                <label for="factor-packs-per-day">Packs per Day</label>
+                <select id="factor-packs-per-day" class="form-select">
+                  <option value="">Select packs per day...</option>
+                  <option value="0.5">Less than 1 pack</option>
+                  <option value="1">1 pack per day</option>
+                  <option value="2">2 packs per day</option>
+                  <option value="3">3+ packs per day</option>
+                </select>
+              </div>
+              
+              <div class="form-group" id="smoking-years-group" style="display: none;">
+                <label for="factor-smoking-years">Years Smoking</label>
+                <input type="number" id="factor-smoking-years" class="form-input" min="0" max="80" placeholder="Enter years smoking">
+              </div>
+              <div class="form-group">
+                <label for="factor-alcohol">Alcohol Consumption</label>
+                <select id="factor-alcohol" class="form-select">
+                  <option value="">Select alcohol consumption...</option>
+                  <option value="never">Never</option>
+                  <option value="occasional">Occasional (1-2 drinks/week)</option>
+                  <option value="moderate">Moderate (3-7 drinks/week)</option>
+                  <option value="regular">Regular (8+ drinks/week)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="factor-stress">Stress Level</label>
+                <select id="factor-stress" class="form-select">
+                  <option value="">Select stress level...</option>
+                  <option value="low">Low (rarely stressed)</option>
+                  <option value="moderate">Moderate (manageable stress)</option>
+                  <option value="high">High (frequent stress)</option>
+                  <option value="extreme">Extreme (chronic stress)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="factor-outlook">Mental Outlook</label>
+                <select id="factor-outlook" class="form-select">
+                  <option value="">Select mental outlook...</option>
+                  <option value="pessimistic">Pessimistic</option>
+                  <option value="realistic">Realistic</option>
+                  <option value="optimistic">Optimistic</option>
+                  <option value="very-optimistic">Very Optimistic</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social & Mental Wellbeing -->
+          <div class="factor-card">
+            <div class="card-header">
+              <h3><i class="fas fa-heart"></i> Social & Mental Wellbeing</h3>
+            </div>
+            <div class="card-content">
+              <div class="form-group">
+                <label for="factor-social-connections">Social Connections</label>
+                <select id="factor-social-connections" class="form-select">
+                  <option value="">Select social level...</option>
+                  <option value="isolated">Isolated (very few interactions)</option>
+                  <option value="few-friends">Few close friends/family</option>
+                  <option value="moderate-social">Moderate social circle</option>
+                  <option value="very-social">Very social (many connections)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-work-life-balance">Work-Life Balance</label>
+                <select id="factor-work-life-balance" class="form-select">
+                  <option value="">Select balance...</option>
+                  <option value="poor">Poor (work dominates life)</option>
+                  <option value="fair">Fair (some balance issues)</option>
+                  <option value="good">Good (mostly balanced)</option>
+                  <option value="excellent">Excellent (great balance)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-life-satisfaction">Life Satisfaction</label>
+                <select id="factor-life-satisfaction" class="form-select">
+                  <option value="">Select satisfaction...</option>
+                  <option value="very-low">Very low</option>
+                  <option value="low">Low</option>
+                  <option value="moderate">Moderate</option>
+                  <option value="high">High</option>
+                  <option value="very-high">Very high</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-purpose">Sense of Purpose</label>
+                <select id="factor-purpose" class="form-select">
+                  <option value="">Select purpose level...</option>
+                  <option value="none">No clear purpose</option>
+                  <option value="little">Little sense of purpose</option>
+                  <option value="some">Some sense of purpose</option>
+                  <option value="strong">Strong sense of purpose</option>
+                  <option value="very-strong">Very strong purpose</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-meditation">Meditation/Mindfulness Practice</label>
+                <select id="factor-meditation" class="form-select">
+                  <option value="">Select practice...</option>
+                  <option value="never">Never</option>
+                  <option value="rarely">Rarely (few times/year)</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="daily">Daily practice</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health Maintenance -->
+          <div class="factor-card">
+            <div class="card-header">
+              <h3><i class="fas fa-user-md"></i> Health Maintenance</h3>
+            </div>
+            <div class="card-content">
+              <div class="form-group">
+                <label for="factor-medical-checkups">Regular Medical Checkups</label>
+                <select id="factor-medical-checkups" class="form-select">
+                  <option value="">Select frequency...</option>
+                  <option value="never">Never/Very rarely</option>
+                  <option value="few-years">Every few years</option>
+                  <option value="annually">Annually</option>
+                  <option value="bi-annually">Twice per year</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-preventive-care">Preventive Care</label>
+                <select id="factor-preventive-care" class="form-select">
+                  <option value="">Select care level...</option>
+                  <option value="none">None</option>
+                  <option value="basic">Basic (some screenings)</option>
+                  <option value="comprehensive">Comprehensive (regular screenings)</option>
+                  <option value="very-comprehensive">Very comprehensive (proactive)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-supplements">Supplement Usage</label>
+                <select id="factor-supplements" class="form-select">
+                  <option value="">Select usage...</option>
+                  <option value="none">None</option>
+                  <option value="basic-vitamins">Basic vitamins (multivitamin)</option>
+                  <option value="targeted">Targeted supplements</option>
+                  <option value="comprehensive">Comprehensive regimen</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="factor-dental-care">Dental Care</label>
+                <select id="factor-dental-care" class="form-select">
+                  <option value="">Select care quality...</option>
+                  <option value="poor">Poor (rarely see dentist)</option>
+                  <option value="fair">Fair (occasional visits)</option>
+                  <option value="good">Good (regular cleanings)</option>
+                  <option value="excellent">Excellent (comprehensive care)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Recommendations -->
+      <div class="factor-card recommendations">
+        <div class="card-header">
+          <h3><i class="fas fa-lightbulb"></i> Health Recommendations</h3>
+        </div>
+        <div class="card-content">
+          <div id="recommendations-content">
+            <p class="recommendations-placeholder">Complete your profile above to receive personalized health recommendations based on scientific research.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Footer -->
+  <footer class="privacy-footer">
+    <div class="privacy-note">
+      <i class="fas fa-shield-alt"></i>
+      <span>All your data is stored locally on your device only and will never leave your computer.</span>
+    </div>
+  </footer>
+
+  <script src="life-calculator.js"></script>
+  <script src="life-factors.js"></script>
+</body>
+</html>

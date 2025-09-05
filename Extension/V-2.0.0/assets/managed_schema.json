@@ -1,0 +1,7 @@
+{
+  "id": "ashes-extension-by-aroice",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "enabledPlugins": [
+    "Ashes time tracker"
+  ]
+}

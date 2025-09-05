@@ -1,0 +1,361 @@
+<!-- Main page - replaces new tab -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ashes - New Tab</title>  
+    <link rel="stylesheet" href="ashes.css">
+  <link rel="stylesheet" href="behavior.css">
+  <link rel="stylesheet" href="timer-end.css">
+  
+  <link rel="icon" type="image/png" href="logo/icon-32x32.png">
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="logo/icon-128x128.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="logo/icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="logo/icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="logo/icon-167x167.png">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#ffb347">
+  <meta name="application-name" content="Ashes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Font Awesomes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>  <div class="ashes-container">
+    <div class="ashes-logo">
+      <!-- SVG logo will be injected here -->
+    </div>
+    <div class="ashes-timer" id="ashes-timer">
+      <!-- Countdown will render here -->
+    </div>    
+    
+    <div class="ashes-tagline">A reminder that time doesn't wait.</div>
+    
+    <div class="timer-context" id="timer-context" style="display: none;">
+      <!-- hidden info for now -->
+      <small style="display: none;">Based on your personalized life expectancy calculation</small>
+    </div>
+    
+    <!-- Post-timer content that shows after countdown reaches zero -->
+    <div class="post-timer-container" id="post-timer-container">
+      <div class="post-timer-message" id="post-timer-message">Still here?</div>
+      <div class="post-timer-second-message" id="post-timer-second-message">Make it count.</div>
+      <div class="post-timer-options" id="post-timer-options">
+        <button class="post-timer-button" id="reset-timer-btn">Reset your time</button>
+        <button class="post-timer-button reflect" id="reflect-btn">Reflect</button>
+      </div>
+    </div>
+      <div class="coming-soon" id="coming-soon">
+      <div class="coming-soon-icon"><i class="fas fa-book-open"></i></div>
+      <h3>Ember Journal</h3>
+      <p class="coming-soon-desc">A place to reflect on your journey</p>
+      <div class="coming-soon-badge">Coming in Future Updates</div>
+      <p class="coming-soon-desc"><br>Peace.</p>
+    </div>
+    
+    <!-- Add Years Modal -->
+    <div class="ashes-modal" id="add-years-modal">
+      <div class="ashes-modal-content add-years-content">
+        <h2>Add More Time</h2>
+        <p class="memento-quote">"Life is short, but it is wide. This too shall pass."</p>
+        
+        <div class="years-options">
+          <button id="add-1-year" class="add-years-btn">+1 Year</button>
+          <button id="add-3-years" class="add-years-btn">+3 Years</button>
+          <button id="add-5-years" class="add-years-btn">+5 Years</button>
+        </div>
+        
+        <button id="close-add-years" class="ashes-modal-close">Cancel</button>
+      </div>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div class="ashes-modal" id="confirmation-modal">
+      <div class="ashes-modal-content">
+        <div class="confirmation-icon">✓</div>
+        <h2 id="confirmation-title">Time Added</h2>
+        <p class="confirmation-quote" id="confirmation-quote">"Remember to embrace the time you have, for it is the most precious currency."</p>
+        <button id="close-confirmation" class="ashes-modal-close">Continue</button>
+      </div>
+    </div>
+
+    <!-- Onboarding Flow Modal -->
+    <div class="ashes-modal onboarding-modal" id="onboarding-modal">
+      <div class="ashes-modal-content onboarding-content">
+        <div class="onboarding-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <span class="progress-text" id="progress-text">Step 1 of 8</span>
+        </div>
+        
+        <div class="onboarding-step" id="step-welcome">
+          <div class="step-icon">🕰️</div>
+          <h2>Welcome to Ashes</h2>
+          <p class="step-description">Let's set up your personalized countdown timer.</p>
+          <p class="step-subtitle">Choose how you'd like to use Ashes:</p>
+          <div class="step-actions">
+            <button class="onboarding-btn primary" id="start-onboarding">Advanced Setup</button>
+            <button class="onboarding-btn secondary" id="skip-onboarding">Simple Setup</button>
+          </div>
+          <div>
+            <button class="onboarding-btn link-style" id="use-clock-only" style="padding-top: 20px;">Just show time</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-simple-setup" style="display: none;">
+          <div class="step-icon">🎂</div>
+          <h2>When were you born?</h2>
+          <p class="step-description">We'll use the default 80-year lifespan for your countdown.</p>
+          <div class="step-input">
+            <input type="date" id="simple-dob" class="onboarding-input">
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-simple">Back</button>
+            <button class="onboarding-btn primary" id="next-simple" disabled>Start Countdown</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-dob" style="display: none;">
+          <div class="step-icon">🎂</div>
+          <h2>When were you born?</h2>
+          <p class="step-description">This helps us calculate your current age and remaining time more accurately.</p>
+          <div class="step-input">
+            <input type="date" id="onboarding-dob" class="onboarding-input">
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-dob">Back</button>
+            <button class="onboarding-btn primary" id="next-dob" disabled>Continue</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-gender" style="display: none;">
+          <div class="step-icon">👤</div>
+          <h2>What's your gender?</h2>
+          <p class="step-description">Life expectancy varies by gender due to biological and lifestyle factors.</p>
+          <div class="step-input">
+            <div class="gender-options">
+              <button class="option-btn" data-value="male">Male</button>
+              <button class="option-btn" data-value="female">Female</button>
+              <button class="option-btn" data-value="other">Other</button>
+            </div>
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-gender">Back</button>
+            <button class="onboarding-btn primary" id="next-gender" disabled>Continue</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-country" style="display: none;">
+          <div class="step-icon">🌍</div>
+          <h2>Where do you live?</h2>
+          <p class="step-description">Different countries have varying life expectancies based on healthcare, environment, and lifestyle.</p>
+          <div class="step-input">
+            <select id="onboarding-country" class="onboarding-select">
+              <option value="">Choose your country...</option>
+              <option value="us">🇺🇸 United States</option>
+              <option value="uk">🇬🇧 United Kingdom</option>
+              <option value="canada">🇨🇦 Canada</option>
+              <option value="australia">🇦🇺 Australia</option>
+              <option value="germany">🇩🇪 Germany</option>
+              <option value="france">🇫🇷 France</option>
+              <option value="japan">🇯🇵 Japan</option>
+              <option value="india">🇮🇳 India</option>
+              <option value="china">🇨🇳 China</option>
+              <option value="brazil">🇧🇷 Brazil</option>
+              <option value="other">🌏 Other</option>
+            </select>
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-country">Back</button>
+            <button class="onboarding-btn primary" id="next-country" disabled>Continue</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-health" style="display: none;">
+          <div class="step-icon">💪</div>
+          <h2>How's your health?</h2>
+          <p class="step-description">Your BMI is a key indicator of overall health and longevity.</p>
+          <div class="step-input">
+            <div class="bmi-input-group">
+              <input type="number" id="onboarding-height" placeholder="Height (cm)" class="onboarding-input half">
+              <input type="number" id="onboarding-weight" placeholder="Weight (kg)" class="onboarding-input half">
+            </div>
+            <div class="bmi-result" id="bmi-result" style="display: none;">
+              Your BMI: <span id="calculated-bmi"></span> - <span id="bmi-category"></span>
+            </div>
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-health">Back</button>
+            <button class="onboarding-btn primary" id="next-health" disabled>Continue</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-lifestyle" style="display: none;">
+          <div class="step-icon">🏃‍♂️</div>
+          <h2>How active are you?</h2>
+          <p class="step-description">Physical activity is one of the strongest predictors of longevity.</p>
+          <div class="step-input">
+            <div class="lifestyle-options">
+              <button class="option-btn" data-value="sedentary">
+                <div class="option-title">Sedentary</div>
+                <div class="option-desc">Little to no exercise</div>
+              </button>
+              <button class="option-btn" data-value="light">
+                <div class="option-title">Light</div>
+                <div class="option-desc">1-2 times per week</div>
+              </button>
+              <button class="option-btn" data-value="moderate">
+                <div class="option-title">Moderate</div>
+                <div class="option-desc">3-4 times per week</div>
+              </button>
+              <button class="option-btn" data-value="active">
+                <div class="option-title">Very Active</div>
+                <div class="option-desc">5+ times per week</div>
+              </button>
+            </div>
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-lifestyle">Back</button>
+            <button class="onboarding-btn primary" id="next-lifestyle" disabled>Continue</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-habits" style="display: none;">
+          <div class="step-icon">🚭</div>
+          <h2>Any habits we should know?</h2>
+          <p class="step-description">Smoking and drinking significantly impact life expectancy.</p>
+          <div class="step-input">
+            <div class="habits-grid">
+              <div class="habit-section">
+                <h4>Smoking?</h4>
+                <div class="habit-options">
+                  <button class="option-btn small" data-habit="smoking" data-value="false">Never</button>
+                  <button class="option-btn small" data-habit="smoking" data-value="true">Yes</button>
+                </div>
+              </div>
+              <div class="habit-section">
+                <h4>Alcohol?</h4>
+                <div class="habit-options">
+                  <button class="option-btn small" data-habit="alcohol" data-value="never">Never</button>
+                  <button class="option-btn small" data-habit="alcohol" data-value="occasional">Occasional</button>
+                  <button class="option-btn small" data-habit="alcohol" data-value="moderate">Moderate</button>
+                  <button class="option-btn small" data-habit="alcohol" data-value="regular">Regular</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-habits">Back</button>
+            <button class="onboarding-btn primary" id="next-habits" disabled>Continue</button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" id="step-results" style="display: none;">
+          <div class="step-icon">🎯</div>
+          <h2>Your Personalized Life Expectancy</h2>
+          <div class="results-display">
+            <div class="main-result">
+              <span id="final-lifespan">85</span>
+              <span class="years-text">years total</span>
+            </div>
+            <div class="result-breakdown" id="result-breakdown">
+              <!-- Dynamic breakdown will be inserted here -->
+            </div>
+          </div>
+          <p class="step-description">Your countdown timer will show the years <strong>remaining</strong> from today. The calculation above shows your total expected lifespan based on scientific research and your lifestyle factors.</p>
+          <div class="step-actions">
+            <button class="onboarding-btn secondary" id="prev-results">Back</button>
+            <button class="onboarding-btn primary" id="complete-onboarding">Start Your Journey</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="ashes-button-group">
+      <button id="menu-btn" class="ashes-menu-btn" title="Menu">☰</button>      <div class="ashes-dropdown-menu" id="dropdown-menu">
+        <div class="ashes-menu-item" id="settings-btn"><i class="fas fa-cog"></i> Quick Settings</div>
+        <div class="ashes-menu-item" id="life-factors-btn"><i class="fas fa-heartbeat"></i> Life Factors</div>
+        <div class="ashes-menu-item" id="advanced-settings-btn"><i class="fas fa-sliders-h"></i> Advanced Settings</div>
+        <div class="ashes-menu-item" id="feedback-btn"><i class="fas fa-comment"></i> Send Feedback</div>
+        <div class="ashes-menu-item" id="updates-btn"><i class="fas fa-bell"></i> What's New</div>
+        <div class="ashes-menu-item" id="about-btn"><i class="fas fa-info-circle"></i> About Developer</div>
+      </div>
+    </div>
+  </div>
+  <div class="ashes-settings-modal" id="settings-modal">
+    <div class="ashes-settings-content">
+      <label>Date of Birth: <input type="date" id="dob-input"></label>
+      <label>Lifespan (years): <input type="number" value="80" id="lifespan-input" min="1" max="120"></label>
+      <div class="settings-actions">
+        <button id="save-settings">Save</button>
+        <button id="close-settings">Cancel</button>
+      </div>
+      <div class="settings-divider"></div>
+      <div class="settings-extra">
+        <button id="rerun-onboarding" class="secondary-btn">Re-run Setup</button>
+        <p class="settings-note">Go through the setup process<br> again to update your information</p>
+      </div>
+    </div>
+  </div>
+    <div class="ashes-modal" id="about-modal">
+    <div class="ashes-modal-content">      <h2>About Developer</h2>
+      <p>I'm <a href="https://me.aroice.in" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">Aryan Techie</a>, a developer and creator who builds for those seeking to live with more intention.</p>
+      <p><a href="https://ashes.aroice.in" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">Ashes</a> wasn't built for productivity.<br>It was built for presence.<br></p><p>For that quiet moment when a tab opens, and you're reminded: <br>you're still alive, and time is still passing.</p>
+      <p>If you wish to connect, feel free to reach out - <br>maybe we're not so different after all.</p>
+      <div class="developer-links">
+        <p><strong>Let's connect:</strong></p>
+        <a href="https://aroice.in" target="_blank" rel="noopener" class="developer-link"><i class="fas fa-globe"></i> aroice.in</a>
+        <a href="https://youtube.com/@aroice" target="_blank" rel="noopener" class="developer-link"><i class="fab fa-youtube"></i> @aroice</a><a href="https://instagram.com/aryantechie" target="_blank" rel="noopener" class="developer-link"><i class="fab fa-instagram"></i> @aryantechie</a>
+      </div>
+      <p class="developer-signature"><span style="text-decoration: none; font-style: normal;">💛</span> “This is your life, and it's ending one minute at a time.” <br><span style="display: block; text-align: right;"><br>— Fight Club (1999)</span></p>
+      <button id="close-about" class="ashes-modal-close">Close</button>
+    </div>
+  </div>
+    <div class="ashes-modal" id="updates-modal">    <div class="ashes-modal-content">      <h2>Updates</h2>      
+      <div class="update-entry">
+        <h3>Version 2.0.0</h3>
+        <p>• Personalized life expectancy calculator</p>
+        <p>• Advanced health and lifestyle factor analysis</p>
+        <p>• Scientific data integration for accurate predictions</p>
+        <p>• Enhanced onboarding with step-by-step guidance</p>
+        <p>• Improved user interface and experience</p>
+        <p>• Better data privacy and local storage</p>
+      </div>
+      
+      <div class="update-entry">
+        <h3>Version 1.3.1</h3>
+        <p>• Keyboard shortcuts now managed directly through Chrome's settings</p>
+        <p>• Minor improvements and bug fixes</p>
+      </div>
+      
+      <div class="update-entry">
+        <h3>Version 1.3.0</h3>
+        <p>• Enhanced user interface</p>
+        <p>• Added new customization options</p>
+        <p>• Improved performance and reliability</p>
+      </div>
+      
+      <div class="update-entry">
+        <h3>Version 1.2.0</h3>
+        <p>• Added dedicated options page</p>
+        <p>• New theme and display customization</p>
+        <p>• User experience improvements</p>
+      </div>
+      
+      <a href="https://github.com/aroice-hq/ashes/releases" class="update-entry" style="color: #4DA6FF; display: flex; align-items: center; gap: 6px; text-decoration: none;">
+  <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+  <span>Release Notes & Update History</span>
+</a>      <button id="close-updates" class="ashes-modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <script src="life-calculator.js"></script>
+  <script src="ashes.js"></script>
+</body>
+</html>
