@@ -155,7 +155,7 @@ If Ashes helps you live more intentionally, consider supporting:
 
 ## ✍️ Author
 
-Made with 💛 by [Aryan Techie](https://me.aroice.in) 🌐 [AROICE](https://aroice.in)
+Made with 💛 by [Aryan Techie](https://aryantechie.com) 🌐 [AROICE](https://aroice.in)
 
 > *"This moment is real. What will you do with it?"*
 
