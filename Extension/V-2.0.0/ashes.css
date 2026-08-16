@@ -7,6 +7,12 @@
   --text-color: #eee;
   --accent-primary: #ffb347;
   --accent-secondary: #ff6a00;
+  /* RGB companions so translucent tints can use rgba(var(--accent-primary-rgb), N) -
+     `rgba(var(--accent-primary-rgb), 0.2)`-style suffix hacks don't work: CSS custom
+     property substitution never merges into a single hex+alpha token, so
+     those declarations were silently invalid and dropped. */
+  --accent-primary-rgb: 255, 179, 71;
+  --accent-secondary-rgb: 255, 106, 0;
   --modal-bg: rgba(0, 0, 0, 0.9);
   --input-bg: #181818;
   --border-color: #444;
@@ -18,6 +24,8 @@ body.theme-light {
   --text-color: #333;
   --accent-primary: #ff6a00;
   --accent-secondary: #ffb347;
+  --accent-primary-rgb: 255, 106, 0;
+  --accent-secondary-rgb: 255, 179, 71;
   --modal-bg: rgba(255, 255, 255, 0.95);
   --input-bg: #fff;
   --border-color: #ddd;
@@ -29,6 +37,8 @@ body.theme-minimal {
   --text-color: #fff;
   --accent-primary: #888;
   --accent-secondary: #aaa;
+  --accent-primary-rgb: 136, 136, 136;
+  --accent-secondary-rgb: 170, 170, 170;
   --modal-bg: rgba(0, 0, 0, 0.95);
   --input-bg: #111;
   --border-color: #333;
@@ -86,6 +96,9 @@ body {
 }
 
 .timer-context {
+  /* Hidden by default; renderTimer() in ashes.js toggles this via
+     element.style.display based on settings. */
+  display: none;
   font-size: 0.8rem;
   color: #666;
   text-align: center;
@@ -95,6 +108,7 @@ body {
 }
 
 .timer-context small {
+  display: none;
   font-style: italic;
 }
 .ashes-button-group {
@@ -321,9 +335,36 @@ body {
   margin-right: 8px;
 }
 
+#about-modal p a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
 .developer-signature {
   margin-top: 1.5rem;
   font-style: italic;
+}
+
+.developer-signature .signature-emoji {
+  text-decoration: none;
+  font-style: normal;
+}
+
+.developer-signature .signature-attribution {
+  display: block;
+  text-align: right;
+}
+
+.release-notes-link {
+  color: #4DA6FF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.clock-only-btn {
+  padding-top: 20px;
 }
 
 /* Feedback form styles */
@@ -436,7 +477,19 @@ body.theme-minimal .ashes-logo img {
 }
 
 .onboarding-step {
+  /* Hidden by default; showStep() in ashes.js reveals the active one via
+     element.style.display, which JS is free to set directly regardless of
+     CSP (only markup style="" attributes are restricted, not the CSSOM) -
+     kept here as a real rule instead of inline style="display:none" on
+     every step so it still applies under the extension's CSP, which has no
+     'unsafe-inline' in style-src. */
+  display: none;
   animation: fadeInUp 0.4s ease;
+}
+
+#step-welcome {
+  /* The one step shown before any JS has run. */
+  display: block;
 }
 
 @keyframes fadeInUp {
@@ -542,7 +595,7 @@ body.theme-minimal .ashes-logo img {
 
 .option-btn:hover {
   border-color: var(--accent-primary);
-  background: var(--accent-primary)20;
+  background: rgba(var(--accent-primary-rgb), 0.2);
 }
 
 .option-btn.selected {
@@ -588,10 +641,18 @@ body.theme-minimal .ashes-logo img {
 
 .bmi-result {
   padding: 12px;
-  background: var(--accent-primary)20;
+  background: rgba(var(--accent-primary-rgb), 0.2);
   border-radius: 6px;
-  border: 1px solid var(--accent-primary)40;
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.4);
   margin-top: 1rem;
+}
+
+#bmi-result {
+  /* Onboarding's BMI preview is hidden until a height+weight are entered
+     (showBMIResult() in ashes.js toggles this) - scoped by ID rather than
+     the shared .bmi-result class, since Life Factors' own BMI display
+     reuses that class and must stay visible by default. */
+  display: none;
 }
 
 .step-actions {
@@ -661,7 +722,7 @@ body.theme-minimal .ashes-logo img {
   font-size: 3rem;
   font-weight: bold;
   color: var(--accent-primary);
-  text-shadow: 0 0 20px var(--accent-primary)40;
+  text-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.4);
   margin-bottom: 0.5rem;
 }
 
@@ -676,7 +737,7 @@ body.theme-minimal .ashes-logo img {
   padding: 1rem;
   background: var(--input-bg);
   border-radius: 8px;
-  border: 2px solid var(--accent-primary)40;
+  border: 2px solid rgba(var(--accent-primary-rgb), 0.4);
 }
 
 .remaining-text {

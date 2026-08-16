@@ -45,20 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // Brave browser detection function
 function isBraveBrowser() {
   return new Promise((resolve) => {
-    // Check if navigator.brave is available
+    // navigator.brave.isBrave() is the only reliable signal for this - a
+    // user-agent/plugins-based fallback heuristic doesn't actually
+    // distinguish Brave from regular Chrome (both report the same
+    // user agent and an empty, deprecated plugins list), so we don't
+    // guess when the real API isn't present.
     if (navigator.brave && navigator.brave.isBrave) {
-      navigator.brave.isBrave().then(result => {
-        resolve(result);
-      }).catch(() => {
-        resolve(false);
-      });
+      navigator.brave.isBrave().then(resolve).catch(() => resolve(false));
     } else {
-      // Secondary check: look for Brave-specific features
-      const isBrave = navigator.userAgent.includes('Chrome') && 
-                     (window.navigator.plugins.length === 0 ||
-                      window.navigator.languages.includes('U')) &&
-                     !window.navigator.userActivation;
-      resolve(isBrave);
+      resolve(false);
     }
   });
 }
@@ -152,14 +147,18 @@ document.getElementById('feedback-form').addEventListener('submit', function(eve
     }
     })
     .then(response => {
+    if (!response.ok) {
+        throw new Error(`Formspree responded with ${response.status}`);
+    }
     // Show confirmation message
     document.getElementById('feedback-form-container').style.display = 'none';
     document.getElementById('confirmation-message').classList.add('active');
-    })      .catch(error => {
+    })
+    .catch(error => {
     console.error('Error submitting form:', error);
-    // Still show the confirmation message to improve UX even if there's an error
-    document.getElementById('feedback-form-container').style.display = 'none';
-    document.getElementById('confirmation-message').classList.add('active');
+    // A non-2xx response or network failure - don't lie to the user that
+    // it sent when it didn't.
+    alert('Sorry, your feedback could not be sent right now. Please try again in a moment.');
     });
 });
 

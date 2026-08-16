@@ -72,7 +72,7 @@
             <div class="card-content">
               <div class="form-group">
                 <label for="factor-dob">Date of Birth</label>
-                <input type="date" id="factor-dob" class="form-input">
+                <input type="date" id="factor-dob" class="form-input" min="1900-01-01">
               </div>
               <div class="form-group">
                 <label for="factor-gender">Gender</label>
@@ -283,7 +283,7 @@
               </div>
               
               <!-- Smoking Details (conditional) -->
-              <div class="form-group" id="smoking-details" style="display: none;">
+              <div class="form-group" id="smoking-details">
                 <label for="factor-packs-per-day">Packs per Day</label>
                 <select id="factor-packs-per-day" class="form-select">
                   <option value="">Select packs per day...</option>
@@ -294,7 +294,7 @@
                 </select>
               </div>
               
-              <div class="form-group" id="smoking-years-group" style="display: none;">
+              <div class="form-group" id="smoking-years-group">
                 <label for="factor-smoking-years">Years Smoking</label>
                 <input type="number" id="factor-smoking-years" class="form-input" min="0" max="80" placeholder="Enter years smoking">
               </div>
@@ -305,7 +305,8 @@
                   <option value="never">Never</option>
                   <option value="occasional">Occasional (1-2 drinks/week)</option>
                   <option value="moderate">Moderate (3-7 drinks/week)</option>
-                  <option value="regular">Regular (8+ drinks/week)</option>
+                  <option value="regular">Regular (8-13 drinks/week)</option>
+                  <option value="heavy">Heavy (14+ drinks/week)</option>
                 </select>
               </div>
               <div class="form-group">

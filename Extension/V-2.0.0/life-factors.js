@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('Life expectancy calculation function is NOT available');
   }
   
+  // Nobody was born in the future - cap the DOB picker at today.
+  const dobField = document.getElementById('factor-dob');
+  if (dobField) dobField.max = new Date().toISOString().split('T')[0];
+
   loadCurrentSettings();
   setupEventListeners();
   setupRadioButtons();
@@ -357,7 +361,7 @@ function saveAndRecalculate() {
     // Smoking and drinking
     smoking: smokingStatus === 'true' || smokingStatus === 'former',
     smokingStatus: smokingStatus,
-    packsPerDay: getValue('factor-packs-per-day'),
+    packsPerDay: parseFloat(getValue('factor-packs-per-day')) || 0,
     smokingYears: parseFloat(getValue('factor-smoking-years')) || 0,
     alcoholConsumption: getValue('factor-alcohol'),
     stressLevel: getValue('factor-stress'),
@@ -387,6 +391,7 @@ function saveAndRecalculate() {
           currentAge: currentAge,
           bmi: settings.bmi,
           smoking: settings.smoking || false,
+          smokingStatus: settings.smokingStatus || '',
           packsPerDay: parseFloat(settings.packsPerDay) || (settings.smoking ? 1 : 0),
           smokingYears: settings.smokingYears || (settings.smoking ? Math.max(currentAge - 18, 0) : 0),
           alcoholConsumption: settings.alcoholConsumption || 'never',
@@ -551,10 +556,20 @@ function getRecommendationIcon(category) {
   const icons = {
     'Weight Management': 'weight',
     'Physical Activity': 'running',
+    'Daily Movement': 'shoe-prints',
     'Smoking Cessation': 'ban',
     'Nutrition': 'apple-alt',
+    'Hydration': 'tint',
+    'Social Wellbeing': 'users',
+    'Work-Life Balance': 'balance-scale',
+    'Mental Health': 'brain',
+    'Purpose & Meaning': 'compass',
     'Stress Management': 'leaf',
     'Sleep Hygiene': 'bed',
+    'Preventive Care': 'user-md',
+    'Dental Health': 'tooth',
+    'Alcohol Consumption': 'glass-whiskey',
+    'Lifestyle Maintenance': 'check-circle',
     'exercise': 'running',
     'diet': 'apple-alt',
     'sleep': 'bed',

@@ -117,7 +117,7 @@ Want to improve Ashes?
 - [-] Custom backgrounds 
 - [-] Time visualization options
 - [-] Widget customization
-- [-] Advacned Lifespan Calculation
+- [✓] Advanced Lifespan Calculation
 
 Suggest ideas → [Feedback Form](https://ashes.aroice.in/feedback/)
 

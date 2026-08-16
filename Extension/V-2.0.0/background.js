@@ -1,5 +1,5 @@
 // Background service worker - handles events and communication behind the scenes
-let EXTENSION_VERSION = '1.3.1';
+let EXTENSION_VERSION = '2.5.0';
 const STORAGE_KEY = 'ashes-settings';
 
 // Dynamically get version from manifest when available

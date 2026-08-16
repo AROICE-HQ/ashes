@@ -56,18 +56,16 @@ const saveStatus = document.getElementById('save-status');
 const versionNumber = document.getElementById('version-number');
 
 // Simplified calculation for basic settings only
+// Advanced calculations are now handled in life-factors.html
+let lifespanTouchedByUser = false;
+
 function updateBasicLifespan() {
-  // Just update the base lifespan input if user changes basic settings
-  // Advanced calculations are now handled in life-factors.html
-  if (lifespanInput && lifespanInput.value) {
-    const currentLifespan = parseInt(lifespanInput.value, 10);
-    if (currentLifespan > 0 && currentLifespan <= 120) {
-      // Valid lifespan, no changes needed
-      return;
-    }
-  }
-  
-  // Set default based on gender and country if no valid input
+  // Only auto-suggest a base lifespan when the user hasn't manually typed
+  // their own value here - otherwise switching gender/country would
+  // silently overwrite something they just entered.
+  if (lifespanTouchedByUser) return;
+
+  // Set default based on gender and country
   const gender = genderSelect.value || 'male';
   const country = countrySelect.value || 'us';
   
@@ -90,7 +88,7 @@ fetch(chrome.runtime.getURL('manifest.json'))
   })
   .catch(error => {
     console.error('Error loading version:', error);
-    versionNumber.textContent = '1.4.0'; // Fallback version
+    versionNumber.textContent = '2.5.0'; // Fallback version
   });
 
 // Load user preferences from storage
@@ -115,10 +113,12 @@ function loadSettings() {
 
     // Apply the theme
     applyTheme(settings.theme || DEFAULT_SETTINGS.theme);
-    
-    // Update basic lifespan calculation
-    updateBasicLifespan();
   });
+
+  // Nobody was born in the future - cap the DOB picker at today.
+  if (dobInput) {
+    dobInput.max = new Date().toISOString().split('T')[0];
+  }
 
   // Set up shortcut settings button handler
   const shortcutButton = document.getElementById('shortcut-settings-button');
@@ -189,6 +189,7 @@ function resetSettings() {
     // Apply default settings to form (basic settings only)
     dobInput.value = '';
     lifespanInput.value = DEFAULT_SETTINGS.lifespan;
+    lifespanTouchedByUser = false;
     genderSelect.value = DEFAULT_SETTINGS.gender;
     countrySelect.value = DEFAULT_SETTINGS.country;
     themeSelect.value = DEFAULT_SETTINGS.theme;
@@ -225,6 +226,12 @@ themeSelect.addEventListener('change', () => {
 // Real-time calculation updates for basic settings
 [genderSelect, countrySelect].forEach(element => {
   element.addEventListener('change', updateBasicLifespan);
+});
+
+// Track manual edits so gender/country changes never clobber a value the
+// user typed themselves
+lifespanInput.addEventListener('input', () => {
+  lifespanTouchedByUser = true;
 });
 
 // Load settings when page is loaded

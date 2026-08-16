@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     logoImg.height = 64;
     logoContainer.appendChild(logoImg);
   }
+
+  // Nobody was born in the future - cap every DOB picker at today so the
+  // native date picker can't produce a countdown target in the past.
+  const todayStr = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(input => {
+    input.max = todayStr;
+  });
 });
 
 // Default settings - went with 80 years as average lifespan
@@ -44,6 +51,15 @@ function saveSettings(settings) {
 function getDOBAndLifespan(callback) {
   getSettings((settings) => {
     let dob = settings?.dob ? new Date(settings.dob) : null;
+    // Defensive clamp: a future or implausibly old DOB (bad manual entry, or
+    // a value written outside the UI) shouldn't be able to send the
+    // countdown negative or wildly skew the age math.
+    if (dob && !isNaN(dob)) {
+      const now = new Date();
+      const earliest = new Date(now.getFullYear() - 125, now.getMonth(), now.getDate());
+      if (dob > now) dob = now;
+      else if (dob < earliest) dob = earliest;
+    }
     // Use the calculated lifespan from advanced settings, fallback to simple lifespan or default
     const lifespan = settings?.lifespan || DEFAULT_LIFESPAN;
     callback(dob, lifespan);
@@ -57,14 +73,23 @@ function getTimeLeft(dob, lifespan) {
   // Get current time based on user's clock
   const now = new Date();
 
-  // How many seconds left? (never show negative numbers)
-  let diff = Math.floor((targetDate - now) / 1000);
-  if (diff < 0) diff = 0;
-  // Convert seconds to years (including leap years - that's why it's 365.25)
-  const secondsPerYear = Math.floor(365.25 * 24 * 60 * 60);
-  const years = Math.floor(diff / secondsPerYear);
-  let remainingSeconds = diff % secondsPerYear;
-  // Break down the rest into days/hours/minutes/seconds
+  if (targetDate <= now) {
+    return { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  // Count whole calendar years remaining (not an averaged 365.25-day year,
+  // which drifts from the actual target date depending on leap years and
+  // where "now" falls in the current year).
+  let years = targetDate.getFullYear() - now.getFullYear();
+  const anniversaryThisYear = new Date(now);
+  anniversaryThisYear.setFullYear(now.getFullYear() + years);
+  if (anniversaryThisYear > targetDate) years--;
+
+  const yearsFromNow = new Date(now);
+  yearsFromNow.setFullYear(now.getFullYear() + years);
+
+  // Break down the true remaining time down to the target date.
+  let remainingSeconds = Math.floor((targetDate - yearsFromNow) / 1000);
   const days = Math.floor(remainingSeconds / (24 * 60 * 60));
   remainingSeconds %= (24 * 60 * 60);
 
@@ -625,7 +650,7 @@ function calculateAndShowResults() {
     </span>
   </div>`;
   
-  breakdownHtml += `<div class="breakdown-summary" style="margin-top: 1rem; padding: 0.8rem; background: var(--accent-primary)20; border-radius: 6px;">
+  breakdownHtml += `<div class="breakdown-summary" style="margin-top: 1rem; padding: 0.8rem; background: rgba(var(--accent-primary-rgb), 0.2); border-radius: 6px;">
     <div><strong>Your Life Expectancy: ${result.adjustedLifespan} years</strong></div>
     <div><strong>Time Remaining: ${Math.round(yearsRemaining)} years</strong></div>
     <div style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem;">
@@ -640,6 +665,12 @@ function calculateAndShowResults() {
 }
 
 function completeOnboarding() {
+  // Recompute the real current age from DOB - must match what
+  // calculateAndShowResults() already showed the user in the breakdown.
+  const currentAge = onboardingData.dob
+    ? Math.floor((Date.now() - new Date(onboardingData.dob).getTime()) / (365.25 * 24 * 60 * 60 * 1000))
+    : 0;
+
   // Save all the collected data
   const settings = {
     dob: onboardingData.dob,
@@ -648,7 +679,7 @@ function completeOnboarding() {
     bmi: onboardingData.bmi,
     smoking: onboardingData.smoking,
     packsPerDay: onboardingData.smoking ? 1 : 0,
-    smokingYears: onboardingData.smoking ? Math.max(25 - 18, 0) : 0, // Estimate
+    smokingYears: onboardingData.smoking ? Math.max(currentAge - 18, 0) : 0,
     alcoholConsumption: onboardingData.alcoholConsumption,
     fitnessLevel: onboardingData.fitnessLevel,
     dietQuality: 'average',

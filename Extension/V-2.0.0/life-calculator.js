@@ -22,6 +22,21 @@ const LIFE_EXPECTANCY_DATABASE = {
 };
 
 /**
+ * Look up base life expectancy for a country + gender. 'male'/'female' hit
+ * the actuarial table directly; anything else (e.g. 'other') has no
+ * dedicated column in this dataset, so fall back to the country's
+ * male/female average rather than returning undefined (which would
+ * propagate to NaN through the rest of the calculation).
+ */
+function getBaseLifespan(country, gender) {
+  const countryData = LIFE_EXPECTANCY_DATABASE[country] || LIFE_EXPECTANCY_DATABASE.other;
+  if (gender === 'male' || gender === 'female') {
+    return countryData[gender] ?? LIFE_EXPECTANCY_DATABASE.other[gender];
+  }
+  return (countryData.male + countryData.female) / 2;
+}
+
+/**
  * Advanced Life Expectancy Calculator
  * Takes into account multiple lifestyle and health factors
  * 
@@ -38,6 +53,7 @@ function calculateAdvancedLifeExpectancy(factors) {
     packsPerDay = 0,
     smokingYears = 0,
     alcoholConsumption = 'never',
+    smokingStatus = '',
     fitnessLevel = 'moderate',
     dietQuality = 'average',
     stressLevel = 'moderate',
@@ -77,8 +93,7 @@ function calculateAdvancedLifeExpectancy(factors) {
   } = factors;
 
   // Start with base life expectancy
-  let baseLifespan = LIFE_EXPECTANCY_DATABASE[country]?.[gender] || 
-                     LIFE_EXPECTANCY_DATABASE.other[gender];
+  let baseLifespan = getBaseLifespan(country, gender);
   
   let adjustments = [];
   let totalAdjustment = 0;
@@ -170,11 +185,23 @@ function calculateAdvancedLifeExpectancy(factors) {
     } else {
       smokingPenalty = 13; // Heavy long-term smokers
     }
-    
+
+    // Former smokers see substantial risk reduction after quitting (CDC/WHO
+    // both show excess mortality risk dropping significantly within 5-15
+    // years of cessation). Approximate that with a flat reduction rather
+    // than a full years-since-quit curve, which would need its own input.
+    const isFormerSmoker = smokingStatus === 'former';
+    if (isFormerSmoker) {
+      smokingPenalty *= 0.6;
+    }
+    smokingPenalty = Math.round(smokingPenalty * 10) / 10;
+
     totalAdjustment -= smokingPenalty;
-    adjustments.push({ 
-      factor: `Smoking History (${packYears} pack-years)`, 
-      adjustment: -smokingPenalty, 
+    adjustments.push({
+      factor: isFormerSmoker
+        ? `Former Smoker (${packYears} pack-years, quit)`
+        : `Smoking History (${packYears} pack-years)`,
+      adjustment: -smokingPenalty,
       type: 'negative',
       impact: packYears > 40 ? 'severe' : packYears > 20 ? 'high' : 'medium'
     });
@@ -239,57 +266,62 @@ function calculateAdvancedLifeExpectancy(factors) {
   let exerciseBonus = 0;
   
   // Exercise frequency impact
+  // NOTE: case values match factor-exercise-frequency's <option value> in
+  // life-factors.html exactly (was previously 'never'/'1-2-times'/etc,
+  // which never matched the HTML's '0'/'1-2'/etc - the entire field was a
+  // silent no-op for every real user; fixed here rather than in the HTML so
+  // any settings already saved by existing installs start working too).
   switch (exerciseFrequency) {
-    case 'never':
+    case '0':
       exerciseBonus -= 4;
-      adjustments.push({ 
-        factor: 'No Exercise', 
-        adjustment: -4, 
+      adjustments.push({
+        factor: 'No Exercise',
+        adjustment: -4,
         type: 'negative',
         impact: 'high'
       });
       break;
     case 'rarely':
       exerciseBonus -= 2;
-      adjustments.push({ 
-        factor: 'Rarely Exercise', 
-        adjustment: -2, 
+      adjustments.push({
+        factor: 'Rarely Exercise',
+        adjustment: -2,
         type: 'negative',
         impact: 'medium'
       });
       break;
-    case '1-2-times':
+    case '1-2':
       exerciseBonus += 1;
-      adjustments.push({ 
-        factor: 'Light Exercise (1-2x/week)', 
-        adjustment: +1, 
+      adjustments.push({
+        factor: 'Light Exercise (1-2x/week)',
+        adjustment: +1,
         type: 'positive',
         impact: 'low'
       });
       break;
-    case '3-4-times':
+    case '3-4':
       exerciseBonus += 3;
-      adjustments.push({ 
-        factor: 'Regular Exercise (3-4x/week)', 
-        adjustment: +3, 
+      adjustments.push({
+        factor: 'Regular Exercise (3-4x/week)',
+        adjustment: +3,
         type: 'positive',
         impact: 'medium'
       });
       break;
-    case '5-6-times':
+    case '5-6':
       exerciseBonus += 5;
-      adjustments.push({ 
-        factor: 'Very Active (5-6x/week)', 
-        adjustment: +5, 
+      adjustments.push({
+        factor: 'Very Active (5-6x/week)',
+        adjustment: +5,
         type: 'positive',
         impact: 'high'
       });
       break;
-    case 'daily':
+    case '7+':
       exerciseBonus += 6;
-      adjustments.push({ 
-        factor: 'Daily Exercise', 
-        adjustment: +6, 
+      adjustments.push({
+        factor: 'Daily Exercise',
+        adjustment: +6,
         type: 'positive',
         impact: 'high'
       });
@@ -328,61 +360,120 @@ function calculateAdvancedLifeExpectancy(factors) {
         break;
       case 'sports':
         exerciseBonus += 1.5;
-        adjustments.push({ 
-          factor: 'Sports Activities', 
-          adjustment: +1.5, 
+        adjustments.push({
+          factor: 'Sports Activities',
+          adjustment: +1.5,
           type: 'positive',
           impact: 'medium'
+        });
+        break;
+      case 'yoga':
+        exerciseBonus += 1.5;
+        adjustments.push({
+          factor: 'Yoga/Flexibility/Pilates',
+          adjustment: +1.5,
+          type: 'positive',
+          impact: 'medium'
+        });
+        break;
+      case 'walking':
+        exerciseBonus += 0.5;
+        adjustments.push({
+          factor: 'Walking/Light Activities',
+          adjustment: +0.5,
+          type: 'positive',
+          impact: 'low'
         });
         break;
     }
   }
   
   // Daily steps impact
+  // NOTE: case values match factor-daily-steps's <option value> exactly
+  // (was 'under-3000'/'3000-5000'/etc, which never matched the HTML's
+  // 'under-3k'/'3k-5k'/etc - see the exerciseFrequency note above, same bug).
   if (dailySteps) {
     switch (dailySteps) {
-      case 'under-3000':
+      case 'under-3k':
         exerciseBonus -= 1;
-        adjustments.push({ 
-          factor: 'Low Daily Steps (<3K)', 
-          adjustment: -1, 
+        adjustments.push({
+          factor: 'Low Daily Steps (<3K)',
+          adjustment: -1,
           type: 'negative',
           impact: 'low'
         });
         break;
-      case '3000-5000':
+      case '3k-5k':
         // Neutral, no adjustment
         break;
-      case '5000-8000':
+      case '5k-8k':
         exerciseBonus += 1;
-        adjustments.push({ 
-          factor: 'Good Daily Steps (5-8K)', 
-          adjustment: +1, 
+        adjustments.push({
+          factor: 'Good Daily Steps (5-8K)',
+          adjustment: +1,
           type: 'positive',
           impact: 'low'
         });
         break;
-      case '8000-10000':
+      case '8k-10k':
         exerciseBonus += 2;
-        adjustments.push({ 
-          factor: 'High Daily Steps (8-10K)', 
-          adjustment: +2, 
+        adjustments.push({
+          factor: 'High Daily Steps (8-10K)',
+          adjustment: +2,
           type: 'positive',
           impact: 'medium'
         });
         break;
-      case 'over-10000':
+      case '10k+':
         exerciseBonus += 3;
-        adjustments.push({ 
-          factor: 'Very High Daily Steps (10K+)', 
-          adjustment: +3, 
+        adjustments.push({
+          factor: 'Very High Daily Steps (10K+)',
+          adjustment: +3,
           type: 'positive',
           impact: 'medium'
         });
         break;
     }
   }
-  
+
+  // Exercise session duration - only meaningful if the person exercises at
+  // all. Was collected by the Life Factors form and saved, but never read
+  // by this function; wired in here with a conservative, capped bonus.
+  if (exerciseDuration && exerciseFrequency && exerciseFrequency !== '0') {
+    switch (exerciseDuration) {
+      case '15-30':
+        // Baseline short session, no adjustment
+        break;
+      case '30-60':
+        exerciseBonus += 0.5;
+        adjustments.push({
+          factor: 'Solid Session Length (30-60 min)',
+          adjustment: +0.5,
+          type: 'positive',
+          impact: 'low'
+        });
+        break;
+      case '60-90':
+        exerciseBonus += 1;
+        adjustments.push({
+          factor: 'Extended Session Length (60-90 min)',
+          adjustment: +1,
+          type: 'positive',
+          impact: 'low'
+        });
+        break;
+      case '90+':
+        exerciseBonus += 1;
+        adjustments.push({
+          factor: 'Long Session Length (90+ min)',
+          adjustment: +1,
+          type: 'positive',
+          impact: 'low'
+        });
+        break;
+    }
+  }
+
   // Apply exercise adjustments (cap at reasonable limits)
   totalAdjustment += Math.min(exerciseBonus, 10); // Max 10 years from exercise
   
@@ -442,6 +533,7 @@ function calculateAdvancedLifeExpectancy(factors) {
   let nutritionBonus = 0;
   
   // Water intake
+  // NOTE: top case was 'over-8', which never matched the HTML's '8+' value.
   if (waterIntake) {
     switch (waterIntake) {
       case 'under-4':
@@ -465,26 +557,29 @@ function calculateAdvancedLifeExpectancy(factors) {
           impact: 'low'
         });
         break;
-      case 'over-8':
+      case '8+':
         nutritionBonus += 1;
-        adjustments.push({ 
-          factor: 'Excellent Hydration (8+ glasses)', 
-          adjustment: +1, 
+        adjustments.push({
+          factor: 'Excellent Hydration (8+ glasses)',
+          adjustment: +1,
           type: 'positive',
           impact: 'low'
         });
         break;
     }
   }
-  
+
   // Fruits and vegetables
+  // NOTE: case values match factor-fruits-vegetables's <option value>
+  // exactly (top/bottom tiers were 'under-2'/'over-5', which never matched
+  // the HTML's '0-1'/'6+').
   if (fruitsVegetables) {
     switch (fruitsVegetables) {
-      case 'under-2':
+      case '0-1':
         nutritionBonus -= 2;
-        adjustments.push({ 
-          factor: 'Low Fruit/Vegetable Intake', 
-          adjustment: -2, 
+        adjustments.push({
+          factor: 'Low Fruit/Vegetable Intake',
+          adjustment: -2,
           type: 'negative',
           impact: 'medium'
         });
@@ -507,11 +602,11 @@ function calculateAdvancedLifeExpectancy(factors) {
           impact: 'medium'
         });
         break;
-      case 'over-5':
+      case '6+':
         nutritionBonus += 3;
-        adjustments.push({ 
-          factor: 'Excellent Fruit/Vegetable Intake (5+)', 
-          adjustment: +3, 
+        adjustments.push({
+          factor: 'Excellent Fruit/Vegetable Intake (5+)',
+          adjustment: +3,
           type: 'positive',
           impact: 'high'
         });
@@ -571,34 +666,37 @@ function calculateAdvancedLifeExpectancy(factors) {
   }
   
   // Meal regularity
+  // NOTE: case values match factor-meal-regularity's <option value> exactly
+  // (was 'somewhat-regular'/'regular'/'very-regular', which never matched
+  // the HTML's '2-meals'/'3-meals'/'3-meals-snacks').
   if (mealRegularity) {
     switch (mealRegularity) {
       case 'irregular':
         nutritionBonus -= 1;
-        adjustments.push({ 
-          factor: 'Irregular Eating Pattern', 
-          adjustment: -1, 
+        adjustments.push({
+          factor: 'Irregular Eating Pattern',
+          adjustment: -1,
           type: 'negative',
           impact: 'low'
         });
         break;
-      case 'somewhat-regular':
+      case '2-meals':
         // Neutral
         break;
-      case 'regular':
+      case '3-meals':
         nutritionBonus += 1;
-        adjustments.push({ 
-          factor: 'Regular Meal Schedule', 
-          adjustment: +1, 
+        adjustments.push({
+          factor: 'Regular Meal Schedule',
+          adjustment: +1,
           type: 'positive',
           impact: 'low'
         });
         break;
-      case 'very-regular':
+      case '3-meals-snacks':
         nutritionBonus += 1.5;
-        adjustments.push({ 
-          factor: 'Very Regular Meal Schedule', 
-          adjustment: +1.5, 
+        adjustments.push({
+          factor: 'Very Regular Meal Schedule',
+          adjustment: +1.5,
           type: 'positive',
           impact: 'medium'
         });
@@ -738,38 +836,41 @@ function calculateAdvancedLifeExpectancy(factors) {
 
   // === MENTAL OUTLOOK ===
   // Psychological studies show optimism correlates with longevity
+  // NOTE: case values match factor-outlook's <option value> exactly (was
+  // 'neutral'/'very-positive', which never matched the HTML's
+  // 'realistic'/'very-optimistic').
   switch (mentalOutlook) {
     case 'pessimistic':
       totalAdjustment -= 2;
-      adjustments.push({ 
-        factor: 'Pessimistic Outlook', 
-        adjustment: -2, 
+      adjustments.push({
+        factor: 'Pessimistic Outlook',
+        adjustment: -2,
         type: 'negative',
         impact: 'medium'
       });
       break;
-    case 'neutral':
-      adjustments.push({ 
-        factor: 'Neutral Mental Outlook', 
-        adjustment: 0, 
+    case 'realistic':
+      adjustments.push({
+        factor: 'Realistic Mental Outlook',
+        adjustment: 0,
         type: 'neutral',
         impact: 'none'
       });
       break;
     case 'optimistic':
       totalAdjustment += 2;
-      adjustments.push({ 
-        factor: 'Optimistic Outlook', 
-        adjustment: +2, 
+      adjustments.push({
+        factor: 'Optimistic Outlook',
+        adjustment: +2,
         type: 'positive',
         impact: 'medium'
       });
       break;
-    case 'very-positive':
+    case 'very-optimistic':
       totalAdjustment += 3;
-      adjustments.push({ 
-        factor: 'Very Positive Outlook', 
-        adjustment: +3, 
+      adjustments.push({
+        factor: 'Very Optimistic Outlook',
+        adjustment: +3,
         type: 'positive',
         impact: 'medium'
       });

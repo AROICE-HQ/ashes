@@ -3,8 +3,8 @@
   "name": "Ashes - New Tab ",
   "short_name": "Ashes",  
   "description": "A New Tab with advanced life expectancy calculation that helps you live with intention. Features lifestyle analysis.",
-  "version": "2.0.0",
-  "version_name": "2.0.0 Advanced Life Calculation Update",
+  "version": "2.5.0",
+  "version_name": "2.5.0 \"Ember\" - Accuracy & Security Update",
   "author": "Aryan Techie (https://github.com/Aryan-Techie)",
   "homepage_url": "https://ashes.aroice.in",
   
@@ -31,12 +31,8 @@
     "service_worker": "background.js",
     "type": "module"
   },
-  "web_accessible_resources": [{
-    "resources": ["assets/*"],
-    "matches": ["<all_urls>"]
-  }],
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'"
   },  "action": {
     "default_title": "Ashes: A reminder that time doesn't wait",
     "default_icon": {

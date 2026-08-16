@@ -10,11 +10,8 @@
   <link rel="stylesheet" href="timer-end.css">
   
   <link rel="icon" type="image/png" href="logo/icon-32x32.png">
-  <!-- Apple Touch Icons -->
+  <!-- Apple Touch Icon -->
   <link rel="apple-touch-icon" href="logo/icon-128x128.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="logo/icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="logo/icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="167x167" href="logo/icon-167x167.png">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#ffb347">
@@ -36,9 +33,9 @@
     
     <div class="ashes-tagline">A reminder that time doesn't wait.</div>
     
-    <div class="timer-context" id="timer-context" style="display: none;">
+    <div class="timer-context" id="timer-context">
       <!-- hidden info for now -->
-      <small style="display: none;">Based on your personalized life expectancy calculation</small>
+      <small>Based on your personalized life expectancy calculation</small>
     </div>
     
     <!-- Post-timer content that shows after countdown reaches zero -->
@@ -104,16 +101,16 @@
             <button class="onboarding-btn secondary" id="skip-onboarding">Simple Setup</button>
           </div>
           <div>
-            <button class="onboarding-btn link-style" id="use-clock-only" style="padding-top: 20px;">Just show time</button>
+            <button class="onboarding-btn link-style clock-only-btn" id="use-clock-only">Just show time</button>
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-simple-setup" style="display: none;">
+        <div class="onboarding-step" id="step-simple-setup">
           <div class="step-icon">🎂</div>
           <h2>When were you born?</h2>
           <p class="step-description">We'll use the default 80-year lifespan for your countdown.</p>
           <div class="step-input">
-            <input type="date" id="simple-dob" class="onboarding-input">
+            <input type="date" id="simple-dob" class="onboarding-input" min="1900-01-01">
           </div>
           <div class="step-actions">
             <button class="onboarding-btn secondary" id="prev-simple">Back</button>
@@ -121,12 +118,12 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-dob" style="display: none;">
+        <div class="onboarding-step" id="step-dob">
           <div class="step-icon">🎂</div>
           <h2>When were you born?</h2>
           <p class="step-description">This helps us calculate your current age and remaining time more accurately.</p>
           <div class="step-input">
-            <input type="date" id="onboarding-dob" class="onboarding-input">
+            <input type="date" id="onboarding-dob" class="onboarding-input" min="1900-01-01">
           </div>
           <div class="step-actions">
             <button class="onboarding-btn secondary" id="prev-dob">Back</button>
@@ -134,7 +131,7 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-gender" style="display: none;">
+        <div class="onboarding-step" id="step-gender">
           <div class="step-icon">👤</div>
           <h2>What's your gender?</h2>
           <p class="step-description">Life expectancy varies by gender due to biological and lifestyle factors.</p>
@@ -151,7 +148,7 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-country" style="display: none;">
+        <div class="onboarding-step" id="step-country">
           <div class="step-icon">🌍</div>
           <h2>Where do you live?</h2>
           <p class="step-description">Different countries have varying life expectancies based on healthcare, environment, and lifestyle.</p>
@@ -177,7 +174,7 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-health" style="display: none;">
+        <div class="onboarding-step" id="step-health">
           <div class="step-icon">💪</div>
           <h2>How's your health?</h2>
           <p class="step-description">Your BMI is a key indicator of overall health and longevity.</p>
@@ -186,7 +183,7 @@
               <input type="number" id="onboarding-height" placeholder="Height (cm)" class="onboarding-input half">
               <input type="number" id="onboarding-weight" placeholder="Weight (kg)" class="onboarding-input half">
             </div>
-            <div class="bmi-result" id="bmi-result" style="display: none;">
+            <div class="bmi-result" id="bmi-result">
               Your BMI: <span id="calculated-bmi"></span> - <span id="bmi-category"></span>
             </div>
           </div>
@@ -196,7 +193,7 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-lifestyle" style="display: none;">
+        <div class="onboarding-step" id="step-lifestyle">
           <div class="step-icon">🏃‍♂️</div>
           <h2>How active are you?</h2>
           <p class="step-description">Physical activity is one of the strongest predictors of longevity.</p>
@@ -226,7 +223,7 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-habits" style="display: none;">
+        <div class="onboarding-step" id="step-habits">
           <div class="step-icon">🚭</div>
           <h2>Any habits we should know?</h2>
           <p class="step-description">Smoking and drinking significantly impact life expectancy.</p>
@@ -256,7 +253,7 @@
           </div>
         </div>
 
-        <div class="onboarding-step" id="step-results" style="display: none;">
+        <div class="onboarding-step" id="step-results">
           <div class="step-icon">🎯</div>
           <h2>Your Personalized Life Expectancy</h2>
           <div class="results-display">
@@ -290,7 +287,7 @@
   </div>
   <div class="ashes-settings-modal" id="settings-modal">
     <div class="ashes-settings-content">
-      <label>Date of Birth: <input type="date" id="dob-input"></label>
+      <label>Date of Birth: <input type="date" id="dob-input" min="1900-01-01"></label>
       <label>Lifespan (years): <input type="number" value="80" id="lifespan-input" min="1" max="120"></label>
       <div class="settings-actions">
         <button id="save-settings">Save</button>
@@ -305,19 +302,29 @@
   </div>
     <div class="ashes-modal" id="about-modal">
     <div class="ashes-modal-content">      <h2>About Developer</h2>
-      <p>I'm <a href="https://aryantechie.com" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">Aryan Techie</a>, a developer and creator who builds for those seeking to live with more intention.</p>
-      <p><a href="https://ashes.aroice.in" target="_blank" rel="noopener" style="color: var(--accent-primary); text-decoration: none;">Ashes</a> wasn't built for productivity.<br>It was built for presence.<br></p><p>For that quiet moment when a tab opens, and you're reminded: <br>you're still alive, and time is still passing.</p>
+      <p>I'm <a href="https://aryantechie.com" target="_blank" rel="noopener">Aryan Techie</a>, a developer and creator who builds for those seeking to live with more intention.</p>
+      <p><a href="https://ashes.aroice.in" target="_blank" rel="noopener">Ashes</a> wasn't built for productivity.<br>It was built for presence.<br></p><p>For that quiet moment when a tab opens, and you're reminded: <br>you're still alive, and time is still passing.</p>
       <p>If you wish to connect, feel free to reach out - <br>maybe we're not so different after all.</p>
       <div class="developer-links">
         <p><strong>Let's connect:</strong></p>
         <a href="https://aroice.in" target="_blank" rel="noopener" class="developer-link"><i class="fas fa-globe"></i> aroice.in</a>
         <a href="https://youtube.com/@aroice" target="_blank" rel="noopener" class="developer-link"><i class="fab fa-youtube"></i> @aroice</a><a href="https://instagram.com/aryantechie" target="_blank" rel="noopener" class="developer-link"><i class="fab fa-instagram"></i> @aryantechie</a>
       </div>
-      <p class="developer-signature"><span style="text-decoration: none; font-style: normal;">💛</span> “This is your life, and it's ending one minute at a time.” <br><span style="display: block; text-align: right;"><br>— Fight Club (1999)</span></p>
+      <p class="developer-signature"><span class="signature-emoji">💛</span> “This is your life, and it's ending one minute at a time.” <br><span class="signature-attribution"><br>— Fight Club (1999)</span></p>
       <button id="close-about" class="ashes-modal-close">Close</button>
     </div>
   </div>
-    <div class="ashes-modal" id="updates-modal">    <div class="ashes-modal-content">      <h2>Updates</h2>      
+    <div class="ashes-modal" id="updates-modal">    <div class="ashes-modal-content">      <h2>Updates</h2>
+      <div class="update-entry">
+        <h3>Version 2.5.0 "Ember"</h3>
+        <p>• Fixed several Life Factors questions that weren't affecting your calculated lifespan</p>
+        <p>• Fixed an issue where selecting "Other" for gender could break the countdown</p>
+        <p>• More accurate smoking history and former-smoker scoring</p>
+        <p>• More precise countdown timing around leap years</p>
+        <p>• Tightened security and privacy protections across the extension</p>
+        <p>• Various smaller bug fixes and polish</p>
+      </div>
+
       <div class="update-entry">
         <h3>Version 2.0.0</h3>
         <p>• Personalized life expectancy calculator</p>
@@ -348,7 +355,7 @@
         <p>• User experience improvements</p>
       </div>
       
-      <a href="https://github.com/aroice-hq/ashes/releases" class="update-entry" style="color: #4DA6FF; display: flex; align-items: center; gap: 6px; text-decoration: none;">
+      <a href="https://github.com/aroice-hq/ashes/releases" class="update-entry release-notes-link">
   <i class="fas fa-external-link-alt" aria-hidden="true"></i>
   <span>Release Notes & Update History</span>
 </a>      <button id="close-updates" class="ashes-modal-close">Close</button>
