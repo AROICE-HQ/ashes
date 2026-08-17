@@ -77,18 +77,6 @@ function calculateAdvancedLifeExpectancy(factors) {
     preventiveCare = '',
     supplements = '',
     dentalCare = '',
-    // Additional Mental Health & Habits factors
-    resilience = '',
-    gratitude = '',
-    learning = '',
-    creativity = '',
-    screenTime = '',
-    natureTime = '',
-    morningRoutine = '',
-    eveningRoutine = '',
-    hobbies = '',
-    volunteering = '',
-    spiritualPractice = '',
     familyHistory = 'average' // Future enhancement
   } = factors;
 
@@ -279,15 +267,6 @@ function calculateAdvancedLifeExpectancy(factors) {
         adjustment: -4,
         type: 'negative',
         impact: 'high'
-      });
-      break;
-    case 'rarely':
-      exerciseBonus -= 2;
-      adjustments.push({
-        factor: 'Rarely Exercise',
-        adjustment: -2,
-        type: 'negative',
-        impact: 'medium'
       });
       break;
     case '1-2':
@@ -1251,524 +1230,6 @@ function calculateAdvancedLifeExpectancy(factors) {
     }
   }
 
-  // === ADDITIONAL MENTAL HEALTH & LIFESTYLE FACTORS ===
-  
-  // Mental Resilience
-  if (resilience) {
-    switch (resilience) {
-      case 'very-low':
-        totalAdjustment -= 3;
-        adjustments.push({ 
-          factor: 'Very Low Mental Resilience', 
-          adjustment: -3, 
-          type: 'negative',
-          impact: 'high'
-        });
-        break;
-      case 'low':
-        totalAdjustment -= 1.5;
-        adjustments.push({ 
-          factor: 'Low Mental Resilience', 
-          adjustment: -1.5, 
-          type: 'negative',
-          impact: 'medium'
-        });
-        break;
-      case 'moderate':
-        // Neutral
-        break;
-      case 'high':
-        totalAdjustment += 2;
-        adjustments.push({ 
-          factor: 'High Mental Resilience', 
-          adjustment: +2, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'very-high':
-        totalAdjustment += 3;
-        adjustments.push({ 
-          factor: 'Very High Mental Resilience', 
-          adjustment: +3, 
-          type: 'positive',
-          impact: 'high'
-        });
-        break;
-    }
-  }
-  
-  // Gratitude Practice
-  if (gratitude) {
-    switch (gratitude) {
-      case 'never':
-        // Neutral
-        break;
-      case 'rarely':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Occasional Gratitude', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'sometimes':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Regular Gratitude Practice', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'daily':
-        totalAdjustment += 2;
-        adjustments.push({ 
-          factor: 'Daily Gratitude Practice', 
-          adjustment: +2, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'multiple-daily':
-        totalAdjustment += 2.5;
-        adjustments.push({ 
-          factor: 'Multiple Daily Gratitude', 
-          adjustment: +2.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-    }
-  }
-  
-  // Continuous Learning
-  if (learning) {
-    switch (learning) {
-      case 'none':
-        totalAdjustment -= 1;
-        adjustments.push({ 
-          factor: 'No Learning Activities', 
-          adjustment: -1, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'occasional':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Occasional Learning', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'regular':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Regular Learning Habits', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'daily':
-        totalAdjustment += 2.5;
-        adjustments.push({ 
-          factor: 'Daily Learning Routine', 
-          adjustment: +2.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'passionate':
-        totalAdjustment += 3;
-        adjustments.push({ 
-          factor: 'Passionate Lifelong Learner', 
-          adjustment: +3, 
-          type: 'positive',
-          impact: 'high'
-        });
-        break;
-    }
-  }
-  
-  // Creative Expression
-  if (creativity) {
-    switch (creativity) {
-      case 'none':
-        totalAdjustment -= 0.5;
-        adjustments.push({ 
-          factor: 'No Creative Activities', 
-          adjustment: -0.5, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'occasional':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Occasional Creative Hobbies', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'regular':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Regular Creative Practice', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'daily':
-        totalAdjustment += 2;
-        adjustments.push({ 
-          factor: 'Daily Creative Expression', 
-          adjustment: +2, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'professional':
-        totalAdjustment += 2.5;
-        adjustments.push({ 
-          factor: 'Professional Creative Work', 
-          adjustment: +2.5, 
-          type: 'positive',
-          impact: 'high'
-        });
-        break;
-    }
-  }
-  
-  // Screen Time Impact
-  if (screenTime) {
-    switch (screenTime) {
-      case 'under-2':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Low Screen Time (<2h)', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case '2-4':
-        // Neutral
-        break;
-      case '4-6':
-        totalAdjustment -= 0.5;
-        adjustments.push({ 
-          factor: 'Moderate Screen Time (4-6h)', 
-          adjustment: -0.5, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case '6-8':
-        totalAdjustment -= 1.5;
-        adjustments.push({ 
-          factor: 'High Screen Time (6-8h)', 
-          adjustment: -1.5, 
-          type: 'negative',
-          impact: 'medium'
-        });
-        break;
-      case 'over-8':
-        totalAdjustment -= 3;
-        adjustments.push({ 
-          factor: 'Excessive Screen Time (8h+)', 
-          adjustment: -3, 
-          type: 'negative',
-          impact: 'high'
-        });
-        break;
-    }
-  }
-  
-  // Time in Nature
-  if (natureTime) {
-    switch (natureTime) {
-      case 'never':
-        totalAdjustment -= 1;
-        adjustments.push({ 
-          factor: 'No Nature Exposure', 
-          adjustment: -1, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'monthly':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Monthly Nature Time', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'weekly':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Weekly Nature Time', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'few-times-week':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Regular Nature Exposure', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'daily':
-        totalAdjustment += 2;
-        adjustments.push({ 
-          factor: 'Daily Outdoor Time', 
-          adjustment: +2, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-    }
-  }
-  
-  // Morning Routine Quality
-  if (morningRoutine) {
-    switch (morningRoutine) {
-      case 'chaotic':
-        totalAdjustment -= 1;
-        adjustments.push({ 
-          factor: 'Chaotic Mornings', 
-          adjustment: -1, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'inconsistent':
-        totalAdjustment -= 0.5;
-        adjustments.push({ 
-          factor: 'Inconsistent Morning Routine', 
-          adjustment: -0.5, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'basic':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Basic Morning Routine', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'structured':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Well-Structured Morning Routine', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'optimized':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Optimized Morning Routine', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-    }
-  }
-  
-  // Evening Wind-Down
-  if (eveningRoutine) {
-    switch (eveningRoutine) {
-      case 'poor':
-        totalAdjustment -= 1;
-        adjustments.push({ 
-          factor: 'Poor Evening Routine', 
-          adjustment: -1, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'minimal':
-        // Neutral
-        break;
-      case 'good':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Good Evening Wind-Down', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'excellent':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Excellent Sleep Preparation', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-    }
-  }
-  
-  // Engaging Hobbies
-  if (hobbies) {
-    switch (hobbies) {
-      case 'none':
-        totalAdjustment -= 1;
-        adjustments.push({ 
-          factor: 'No Regular Hobbies', 
-          adjustment: -1, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'passive':
-        totalAdjustment -= 0.5;
-        adjustments.push({ 
-          factor: 'Mostly Passive Activities', 
-          adjustment: -0.5, 
-          type: 'negative',
-          impact: 'low'
-        });
-        break;
-      case 'some-active':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Some Active Hobbies', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'multiple':
-        totalAdjustment += 2;
-        adjustments.push({ 
-          factor: 'Multiple Engaging Hobbies', 
-          adjustment: +2, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'passionate':
-        totalAdjustment += 2.5;
-        adjustments.push({ 
-          factor: 'Passionate About Hobbies', 
-          adjustment: +2.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-    }
-  }
-  
-  // Community Service/Volunteering
-  if (volunteering) {
-    switch (volunteering) {
-      case 'never':
-        // Neutral
-        break;
-      case 'occasionally':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Occasional Volunteering', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'few-times-year':
-        totalAdjustment += 1;
-        adjustments.push({ 
-          factor: 'Regular Volunteering', 
-          adjustment: +1, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'monthly':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Monthly Community Service', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'weekly':
-        totalAdjustment += 2.5;
-        adjustments.push({ 
-          factor: 'Weekly Volunteer Work', 
-          adjustment: +2.5, 
-          type: 'positive',
-          impact: 'high'
-        });
-        break;
-    }
-  }
-  
-  // Spiritual/Religious Practice
-  if (spiritualPractice) {
-    switch (spiritualPractice) {
-      case 'none':
-        // Neutral
-        break;
-      case 'occasional':
-        totalAdjustment += 0.5;
-        adjustments.push({ 
-          factor: 'Occasional Spiritual Practice', 
-          adjustment: +0.5, 
-          type: 'positive',
-          impact: 'low'
-        });
-        break;
-      case 'regular':
-        totalAdjustment += 1.5;
-        adjustments.push({ 
-          factor: 'Regular Spiritual Practice', 
-          adjustment: +1.5, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'daily':
-        totalAdjustment += 2;
-        adjustments.push({ 
-          factor: 'Daily Spiritual Practice', 
-          adjustment: +2, 
-          type: 'positive',
-          impact: 'medium'
-        });
-        break;
-      case 'deeply-committed':
-        totalAdjustment += 2.5;
-        adjustments.push({ 
-          factor: 'Deeply Committed Spiritual Practice', 
-          adjustment: +2.5, 
-          type: 'positive',
-          impact: 'high'
-        });
-        break;
-    }
-  }
-
   // === AGE ADJUSTMENT ===
   // Younger people have more time to benefit from lifestyle changes
   if (currentAge > 0) {
@@ -1904,13 +1365,17 @@ function generateHealthRecommendations(factors, calculationResult) {
   }
   
   // Exercise recommendations
-  if (factors.exerciseFrequency === 'never' || factors.fitnessLevel === 'sedentary') {
+  // exerciseFrequency's real values are '0'/'1-2'/'3-4'/'5-6'/'7+' (see the
+  // <select> in life-factors.html) - the 'never'/'rarely' this used to check
+  // against never matched, so only the fitnessLevel half of each OR ever
+  // fired for anyone whose fitnessLevel didn't happen to line up too.
+  if (factors.exerciseFrequency === '0' || factors.fitnessLevel === 'sedentary') {
     recommendations.push({
       category: 'Physical Activity',
       suggestion: 'Start with 10-15 minutes of daily walking, gradually increase to 150 minutes per week',
       priority: 'critical'
     });
-  } else if (factors.exerciseFrequency === 'rarely' || factors.fitnessLevel === 'light') {
+  } else if (factors.exerciseFrequency === '1-2' || factors.fitnessLevel === 'light') {
     recommendations.push({
       category: 'Physical Activity',
       suggestion: 'Increase to 3-4 exercise sessions per week, aim for 150 minutes of moderate activity',
@@ -1925,13 +1390,13 @@ function generateHealthRecommendations(factors, calculationResult) {
   }
   
   // Daily steps recommendations
-  if (factors.dailySteps === 'under-3000') {
+  if (factors.dailySteps === 'under-3k') {
     recommendations.push({
       category: 'Daily Movement',
       suggestion: 'Aim for at least 5,000 daily steps - take stairs, park farther, walk during breaks',
       priority: 'high'
     });
-  } else if (factors.dailySteps === '3000-5000') {
+  } else if (factors.dailySteps === '3k-5k') {
     recommendations.push({
       category: 'Daily Movement',
       suggestion: 'Great start! Try to reach 8,000-10,000 steps daily for optimal health benefits',
@@ -1949,7 +1414,7 @@ function generateHealthRecommendations(factors, calculationResult) {
   }
   
   // Nutrition recommendations
-  if (factors.fruitsVegetables === 'under-2') {
+  if (factors.fruitsVegetables === '0-1') {
     recommendations.push({
       category: 'Nutrition',
       suggestion: 'Increase fruits and vegetables to 5+ servings daily - start by adding one extra serving per meal',

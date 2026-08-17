@@ -1,0 +1,30 @@
+name: Calculator tests
+
+on:
+  push:
+    paths:
+      - 'Extension/V-2.0.0/**'
+      - '.github/workflows/test.yml'
+  pull_request:
+    paths:
+      - 'Extension/V-2.0.0/**'
+      - '.github/workflows/test.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Extension/V-2.0.0
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Regression suite
+        run: node test-calculator.js
+
+      - name: Form/calculator value drift check
+        run: node check-factor-values.js
