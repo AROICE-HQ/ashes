@@ -1,6 +1,13 @@
 // Background service worker - handles events and communication behind the scenes
-let EXTENSION_VERSION = '2.5.0';
+let EXTENSION_VERSION = '2.5.1';
 const STORAGE_KEY = 'ashes-settings';
+
+// Point Chrome's built-in uninstall survey at our own feedback page instead
+// of leaving it unset. Re-set on every service worker start (not just
+// onInstalled) since that's Chrome's documented recommendation for this API.
+chrome.runtime.setUninstallURL(
+  'https://ashes.aroice.in/farewell/?v=' + chrome.runtime.getManifest().version
+);
 
 // Dynamically get version from manifest when available
 fetch(self.registration.scope + 'manifest.json')
@@ -54,12 +61,12 @@ chrome.runtime.onInstalled.addListener((details) => {
     chrome.tabs.create({ url: 'ashes.html' });  }   else if (reason === 'update') {
     // Extension was updated to a newer version
     const previousVersion = details.previousVersion;
-    chrome.storage.local.set({ 
+    chrome.storage.local.set({
       'lastUpdateDate': Date.now(),
       'previousVersion': previousVersion
     });
-    
-    // TODO: Need to add a "what's new" feature for updates
+    // ashes.js reads previousVersion on load and auto-opens the changelog
+    // modal once per new version - see maybeShowWhatsNew() there.
   }
     // Shortcuts are now managed via chrome://extensions/shortcuts
   // No need to load settings for shortcuts

@@ -841,7 +841,36 @@ const closeAboutBtn = document.getElementById('close-about');
 aboutBtn.onclick = () => {
   dropdownMenu.classList.remove('active');
   aboutModal.classList.add('active');
+  renderSessionStats();
 };
+
+// "You've opened Ashes N times since [date]" - sessionCount/installDate are
+// already tracked by background.js on every browser startup and first
+// install; this just surfaces them instead of leaving them unused.
+function renderSessionStats() {
+  const statsElement = document.getElementById('session-stats');
+  if (!statsElement) return;
+
+  chrome.storage.local.get(['sessionCount', 'installDate'], (result) => {
+    if (!result.installDate) {
+      statsElement.textContent = '';
+      return;
+    }
+
+    const sessionCount = result.sessionCount || 0;
+    const installDate = new Date(result.installDate).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    // sessionCount tracks browser startups (background.js's onStartup),
+    // not new-tab opens - phrase it as what it actually measures.
+    statsElement.textContent = sessionCount > 0
+      ? `${sessionCount.toLocaleString()} browsing session${sessionCount === 1 ? '' : 's'} with Ashes since ${installDate}.`
+      : `Installed on ${installDate}.`;
+  });
+}
 
 closeAboutBtn.onclick = () => {
   aboutModal.classList.remove('active');
@@ -860,6 +889,29 @@ updatesBtn.onclick = () => {
   dropdownMenu.classList.remove('active');
   updatesModal.classList.add('active');
 };
+
+// Auto-open the changelog once after an update, instead of leaving it as a
+// manual-only menu item. background.js's onInstalled('update') handler
+// already records previousVersion; whatsNewSeenVersion tracks which
+// version's changelog this profile has already been shown, so it opens
+// exactly once per version, not on every new tab after that.
+(function maybeShowWhatsNew() {
+  const currentVersion = chrome.runtime.getManifest().version;
+
+  chrome.storage.local.get(['previousVersion', 'whatsNewSeenVersion'], (result) => {
+    const isFreshUpdate = result.previousVersion && result.previousVersion !== currentVersion;
+    const alreadySeen = result.whatsNewSeenVersion === currentVersion;
+
+    if (isFreshUpdate && !alreadySeen) {
+      updatesModal.classList.add('active');
+      chrome.storage.local.set({ whatsNewSeenVersion: currentVersion });
+    } else if (!result.whatsNewSeenVersion) {
+      // First run ever (fresh install, no previousVersion yet) - mark the
+      // current version seen so a later real update is what triggers this.
+      chrome.storage.local.set({ whatsNewSeenVersion: currentVersion });
+    }
+  });
+})();
 
 closeUpdatesBtn.onclick = () => {
   updatesModal.classList.remove('active');

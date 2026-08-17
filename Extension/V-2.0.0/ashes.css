@@ -55,12 +55,16 @@ body {
   align-items: center;
   justify-content: center;
   transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 .ashes-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  max-width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 .ashes-logo {
   width: 64px;
@@ -81,10 +85,17 @@ body {
   100% { filter: drop-shadow(0 0 24px var(--accent-primary)); }
 }
 .ashes-timer {
-  font-size: 2.5rem;
+  /* Fluid instead of a fixed 2.5rem: the default display format renders
+     ~26 characters ("45y 200d 14h 23m 07s left") at 0.1em letter-spacing,
+     which overflowed any window narrower than roughly 750-800px (a very
+     common half-screen-snap width) since nothing here ever scaled down
+     outside the one onboarding-only breakpoint below. */
+  font-size: clamp(1.15rem, 5.5vw, 2.5rem);
   letter-spacing: 0.1em;
   color: var(--accent-primary);
   text-shadow: 0 0 8px var(--accent-secondary);
+  text-align: center;
+  overflow-wrap: break-word;
   transition: color 0.3s;
 }
 .ashes-tagline {
@@ -338,6 +349,13 @@ body {
 #about-modal p a {
   color: var(--accent-primary);
   text-decoration: none;
+}
+
+.session-stats {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  opacity: 0.55;
 }
 
 .developer-signature {
@@ -805,24 +823,44 @@ body.theme-minimal .ashes-logo img {
     padding: 1.5rem;
     max-width: 90vw;
   }
-  
+
   .step-actions {
     flex-direction: column;
   }
-  
+
   .gender-options {
     grid-template-columns: 1fr;
   }
-  
+
   .lifestyle-options {
     grid-template-columns: 1fr;
   }
-  
+
   .habits-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .main-result {
     font-size: 2.5rem;
+  }
+
+  .ashes-button-group {
+    top: 12px;
+    right: 12px;
+    gap: 10px;
+  }
+
+  .ashes-menu-btn {
+    font-size: 1.2rem;
+  }
+
+  .ashes-logo,
+  .ashes-logo img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ashes-tagline {
+    font-size: 0.95rem;
   }
 }

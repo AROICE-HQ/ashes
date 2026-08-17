@@ -39,6 +39,12 @@
       "codename": "Ember",
       "changes": "Fixed several Life Factors questions that weren't affecting the calculated lifespan, fixed a crash when selecting 'Other' for gender, more accurate smoking history and former-smoker scoring, more precise countdown timing, tightened security and privacy protections",
       "date": "2026-08-17"
+    },
+    {
+      "version": "2.5.1",
+      "codename": "Afterglow",
+      "changes": "Uninstalling now offers a quick, optional feedback survey instead of just disappearing",
+      "date": "2026-08-17"
     }
   ]
 }
