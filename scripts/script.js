@@ -129,16 +129,18 @@ if (savedTheme) {
     });
 }
     // Form submission handling
-document.getElementById('feedback-form').addEventListener('submit', function(event) {
+const feedbackForm = document.getElementById('feedback-form');
+if (feedbackForm) {
+    feedbackForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     const feedbackMessage = document.getElementById('feedback-message').value;
-    
+
     if (!feedbackMessage || feedbackMessage.trim() === '') {
     alert('Please enter your feedback message before sending.');
     return;
     }
-    
+
     // Get form data
     const feedbackType = document.getElementById('feedback-type').value;
     const email = document.getElementById('feedback-email').value;
@@ -168,30 +170,5 @@ document.getElementById('feedback-form').addEventListener('submit', function(eve
     // it sent when it didn't.
     alert('Sorry, your feedback could not be sent right now. Please try again in a moment.');
     });
-});
-
-// Handle "Back to Ashes" links
-document.getElementById('back-to-ashes').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.close(); // Try to close the window first (works in some contexts)
-    
-    // For browsers that don't allow window.close(), try to redirect to parent extension
-    // or go back to previous page if this is embedded in the extension
-    if (window.history.length > 1) {
-    window.history.back();
-    } else if (window.parent && window.parent !== window) {
-    window.parent.postMessage('closeAshesModal', '*');
-    }
-});
-
-// Same functionality for confirmation message link
-document.getElementById('back-to-ashes-confirmation').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.close();
-    
-    if (window.history.length > 1) {
-    window.history.back();
-    } else if (window.parent && window.parent !== window) {
-    window.parent.postMessage('closeAshesModal', '*');
-    }
-});
+    });
+}

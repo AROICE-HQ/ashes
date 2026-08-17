@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why Ashes Exists - Ashes</title>
-  <meta name="description" content="The story behind Ashes: a memento mori for your browser, and why a countdown belongs on your new tab page.">
+  <title>Security - Ashes</title>
+  <meta name="description" content="How Ashes actually handles your data, in plain language — what stays local, what doesn't, and how to report a vulnerability.">
 
   <!-- Security Headers -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';">
@@ -15,9 +15,9 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ashes.aroice.in/about/">
-  <meta property="og:title" content="Why Ashes Exists - Ashes">
-  <meta property="og:description" content="The story behind Ashes: a memento mori for your browser, and why a countdown belongs on your new tab page.">
+  <meta property="og:url" content="https://ashes.aroice.in/security/">
+  <meta property="og:title" content="Security - Ashes">
+  <meta property="og:description" content="How Ashes actually handles your data, in plain language — what stays local, what doesn't, and how to report a vulnerability.">
   <meta property="og:image" content="https://ashes.aroice.in/assets/social-media/og-banner.png">
   <meta property="og:image:alt" content="Ashes New Tab Extension Banner">
   <meta property="og:image:width" content="1200">
@@ -26,9 +26,9 @@
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://ashes.aroice.in/about/">
-  <meta property="twitter:title" content="Why Ashes Exists - Ashes">
-  <meta property="twitter:description" content="The story behind Ashes: a memento mori for your browser, and why a countdown belongs on your new tab page.">
+  <meta property="twitter:url" content="https://ashes.aroice.in/security/">
+  <meta property="twitter:title" content="Security - Ashes">
+  <meta property="twitter:description" content="How Ashes actually handles your data, in plain language — what stays local, what doesn't, and how to report a vulnerability.">
   <meta property="twitter:image" content="https://ashes.aroice.in/assets/social-media/og-banner.png">
   <meta property="twitter:creator" content="@aryantechie">
   <meta property="twitter:site" content="@aryantechie">
@@ -37,7 +37,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="../styles/main.css">
-  <link rel="stylesheet" href="../styles/about.css">
+  <link rel="stylesheet" href="../styles/security.css">
   <link rel="icon" type="image/png" href="../assets/logo/icon-32x32.png">
 </head>
 <body>
@@ -52,39 +52,40 @@
       </div>
     </header>
 
-    <div class="about-content">
+    <div class="security-content">
       <div class="page-header">
-        <h1>Why Ashes Exists</h1>
-        <p class="subtitle">A short reminder, on every new tab.</p>
+        <h1>Security &amp; Data</h1>
+        <p class="subtitle">What actually happens with your data, not just what a policy says.</p>
       </div>
 
-      <section class="about-section">
-        <h2>Memento Mori</h2>
-        <p>"Ashes" refers to the old phrase "ashes to ashes, dust to dust" — a reminder of mortality. Memento mori, "remember you must die," is a practice at least as old as Stoic philosophy: keeping death in view, not to dwell on it, but to see the present moment more clearly.</p>
-        <p>Most days it's easy to forget that time is finite — nothing in a browser ever tells you otherwise. Ashes puts one honest number where you'll actually see it, and lets that number do the reminding.</p>
+      <section class="security-section security-good">
+        <h2><i class="fas fa-check"></i> What stays on your device</h2>
+        <ul class="security-list">
+          <li>Your birthdate, lifespan estimate, and every preference are saved with <code>chrome.storage.local</code> — a storage box that belongs to your browser, on your machine. We don't run a server that receives it.</li>
+          <li>No analytics, no ad network, no tracking script of any kind, anywhere in the extension.</li>
+          <li>Incognito windows keep a fully separate copy of your settings (Chrome's "split" mode) — nothing you set in a normal window carries into incognito, or back.</li>
+          <li>The extension requests exactly two permissions: <code>storage</code> (to save your settings) and <code>commands</code> (for the optional keyboard shortcut). Nothing that reads your browsing history, open tabs, or network traffic.</li>
+          <li>Every extension page runs under a Content Security Policy that only allows loading resources from itself and two explicitly named font/icon providers — nothing else can load, by design, not just by promise.</li>
+        </ul>
       </section>
 
-      <blockquote class="about-quote">
-        <p>"Let us prepare our minds as if we'd come to the very end of life. Let us postpone nothing."</p>
-        <cite>— Seneca</cite>
-      </blockquote>
-
-      <section class="about-section">
-        <h2>Why the New Tab</h2>
-        <p>A new tab is the most-opened, least-noticed screen in a browser — dozens of times a day, gone in an instant, holding no information of its own. Ashes uses that exact moment instead of adding another app to open or another notification to dismiss.</p>
-        <p>The countdown isn't a gimmick or a guess. It's calculated from your birthdate and an estimated lifespan you can refine with 30+ real health and lifestyle factors, and it updates live. Confronting that number isn't meant to be heavy — most people describe it as clarifying: a nudge to prioritize what actually matters and stop postponing what doesn't need to wait.</p>
+      <section class="security-section">
+        <h2><i class="fas fa-triangle-exclamation"></i> The one exception</h2>
+        <p>If you submit the <a href="../feedback/">Feedback form</a>, what you type is sent to <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> — a third-party form processor — so it can be delivered to us as an email. That's the only place any typed input ever leaves your device, and only when you choose to submit it.</p>
       </section>
 
-      <section class="about-section">
-        <h2>The Person Behind It</h2>
-        <p>Ashes was built by <a href="https://aryantechie.com" target="_blank" rel="noopener">Aryan Techie</a>, founder of <a href="https://aroice.in" target="_blank" rel="noopener">AROICE</a> — out of a personal need for something that would turn mindless browsing into moments of reflection, rather than another tool demanding more attention.</p>
-        <p>Read the full build story in the <a href="https://aryantechie.com/work/ashes" target="_blank" rel="noopener">case study <i class="fas fa-arrow-up-right-from-square"></i></a>. Writing about Ashes? There's a <a href="../press/">press kit</a> with logos and boilerplate copy.</p>
+      <section class="security-section">
+        <h2><i class="fas fa-wrench"></i> Still being closed</h2>
+        <p>Every page currently loads the IBM Plex Mono font from Google Fonts and its icons from Cloudflare's CDN. That means those two services see a request each time you open a new tab — no personal data is in that request, but it's still an external call this project's own "fully local" claim should not have to make an exception for. Self-hosting both is on the <a href="../roadmap/">roadmap</a> to close this gap for good.</p>
       </section>
 
-      <div class="about-cta">
-        <a href="https://chromewebstore.google.com/detail/Ashes%20-%20New%20Tab/ldjabgmogbniabagofffdgkohdeemiim" id="browser-cta" class="cta-button" target="_blank" rel="noopener">
-          <i id="browser-icon" class="fab fa-chrome"></i> <span id="browser-text">Add to Chrome</span>
-        </a>
+      <section class="security-section">
+        <h2><i class="fas fa-bug"></i> Found a vulnerability?</h2>
+        <p>Report it responsibly to <a href="mailto:admin@aroice.in">admin@aroice.in</a>. This site also publishes a standard <a href="/.well-known/security.txt" target="_blank" rel="noopener">security.txt</a> for automated disclosure tooling.</p>
+      </section>
+
+      <div class="security-footnote">
+        <p>This page explains practice. For the legal policy, see the <a href="../privacy/">Privacy Policy</a>.</p>
       </div>
 
       <div class="return-link">
@@ -101,15 +102,15 @@
         <a href="mailto:admin@aroice.in" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
       <div class="footer-links">
-        <a href="../about/" class="active">About</a>
+        <a href="../about/">About</a>
         <a href="../privacy/">Privacy Policy</a>
         <a href="../terms/">Terms of Use</a>
+        <a href="../security/" class="active">Security</a>
         <a href="../feedback/">Feedback</a>
         <a href="../faq/">FAQ</a>
         <a href="../updates.html">What's New</a>
         <a href="../roadmap/">Roadmap</a>
         <a href="../support/">Support</a>
-        <a href="../security/">Security</a>
         <a href="../why-ashes/">Why Ashes</a>
       </div>
       <p class="copyright"></p>
@@ -117,7 +118,6 @@
     </footer>
   </div>
   <script src="../scripts/script.js"></script>
-  <script src="../scripts/about.js"></script>
   <script src="../scripts/security-headers.js"></script>
 </body>
 </html>

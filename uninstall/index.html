@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Before You Go - Ashes</title>
+  <meta name="description" content="Sorry to see you go. One quick question, if you have a moment.">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://formspree.io;">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/feedback.css">
+  <link rel="icon" type="image/png" href="../assets/logo/icon-32x32.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="../assets/logo/icon-128x128.png" alt="Ashes Logo">
+        <span class="logo-text">Ashes</span>
+      </div>
+      <div class="theme-circle" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle theme">
+        <i id="theme-icon" class="fas fa-sun"></i>
+      </div>
+    </header>
+
+    <div class="feedback-content">
+      <div class="page-header">
+        <h1>Before You Go</h1>
+        <p class="subtitle">Sorry to see Ashes go. One quick question helps a lot — no pressure.</p>
+      </div>
+
+      <div class="feedback-form-container" id="feedback-form-container">
+        <form id="uninstall-form" class="feedback-form">
+          <div class="form-group">
+            <label for="uninstall-reason">What made you remove it?</label>
+            <select id="uninstall-reason" required>
+              <option value="" disabled selected>Choose a reason</option>
+              <option value="bugs">Ran into bugs or issues</option>
+              <option value="workflow">Didn't fit how I browse</option>
+              <option value="alternative">Found something I liked better</option>
+              <option value="privacy">Privacy or data concerns</option>
+              <option value="trying">Was just trying it out</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="uninstall-details">Anything specific? (optional)</label>
+            <textarea id="uninstall-details" rows="4" placeholder="What would have made this better?"></textarea>
+          </div>
+
+          <div class="feedback-actions">
+            <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> No thanks</a>
+            <button type="submit" class="feedback-btn primary">Send Feedback</button>
+          </div>
+        </form>
+
+        <div class="confirmation-message" id="confirmation-message">
+          <i class="fas fa-circle-check confirmation-icon"></i>
+          <h2>Thanks — that's genuinely useful.</h2>
+          <p>If anything changes, Ashes will be right where you left it.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/Aryan-Techie" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/aryantechie" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/aryantechie" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://youtube.com/@aroice" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="mailto:admin@aroice.in" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="../about/">About</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../terms/">Terms of Use</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../faq/">FAQ</a>
+      </div>
+      <p class="copyright"></p>
+      <p class="made-with-love">Made with 💛 by <a href="https://aryantechie.com" target="_blank" rel="noopener">Aryan Techie</a> &copy; <span id="year"></span> <a href="https://aroice.in" target="_blank" rel="noopener">AROICE</a></p>
+    </footer>
+  </div>
+  <script src="../scripts/script.js"></script>
+  <script src="../scripts/uninstall.js"></script>
+  <script src="../scripts/security-headers.js"></script>
+</body>
+</html>
