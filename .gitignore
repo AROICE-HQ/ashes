@@ -15,3 +15,7 @@ impeccable
 # Impeccable design-skill's GitHub Copilot install (local tooling only)
 .github/agents/
 .github/hooks/
+
+# Design-system working docs (internal reference, not for the public repo)
+PRODUCT.md
+DESIGN.md
