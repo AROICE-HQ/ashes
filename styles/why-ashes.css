@@ -1,53 +1,4 @@
 /* Why Ashes (comparison) page specific styles */
-.why-content {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2.5rem;
-  background: linear-gradient(135deg, rgba(35, 35, 42, 0.85) 0%, rgba(22, 22, 28, 0.92) 100%);
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #fff;
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .why-content {
-    animation: none;
-  }
-}
-
-.page-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.page-header h1 {
-  font-size: 2.8rem;
-  margin-bottom: 0.7rem;
-  background: linear-gradient(135deg, #ffb347, #ffcc33);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
-  letter-spacing: 0.02em;
-}
-
-.subtitle {
-  background: linear-gradient(90deg, #e6e6e6, #aaa);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1.6;
-  font-size: 1.05rem;
-}
 
 .why-section {
   text-align: center;
@@ -140,15 +91,6 @@
 }
 
 @media (max-width: 700px) {
-  .why-content {
-    padding: 1.5rem;
-    margin: 1.5rem 1rem;
-  }
-
-  .page-header h1 {
-    font-size: 2.2rem;
-  }
-
   .why-compare {
     grid-template-columns: 1fr;
   }

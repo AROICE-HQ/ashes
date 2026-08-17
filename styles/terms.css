@@ -1,25 +1,4 @@
 /* Terms of Use page specific styles */
-.terms-content {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: rgba(30, 30, 30, 0.7);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #fff;
-}
-
-.page-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-.page-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
 
 .last-updated {
   color: #aaa;
@@ -151,15 +130,6 @@
 }
 
 @media (max-width: 768px) {
-  .terms-content {
-    padding: 1.5rem;
-    margin: 1.5rem 1rem;
-  }
-  
-  .page-header h1 {
-    font-size: 2rem;
-  }
-  
   .terms-section {
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
