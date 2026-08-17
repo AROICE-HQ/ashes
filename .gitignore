@@ -3,3 +3,15 @@ readme-template.md
 
 # Private internal notes (analysis, audits, roadmaps) - not for public repo
 private/
+
+
+# customs
+
+.claude
+
+.impeccable
+impeccable
+
+# Impeccable design-skill's GitHub Copilot install (local tooling only)
+.github/agents/
+.github/hooks/

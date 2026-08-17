@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
   backToTopButton.textContent = '↑';
   backToTopButton.classList.add('back-to-top');
   backToTopButton.title = 'Back to Top';
+  backToTopButton.setAttribute('aria-label', 'Back to top');
   document.body.appendChild(backToTopButton);
 
   // Show/hide back to top button based on scroll position

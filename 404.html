@@ -56,7 +56,7 @@
   <style>
     /* 404 Page Specific Styles */
     .error-number {
-      font-size: 8rem;
+      font-size: clamp(3.5rem, 18vw, 6rem);
       font-weight: bold;
       color: var(--accent-primary);
       margin-bottom: 0;
@@ -134,6 +134,13 @@
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .error-number {
+        animation: none;
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -145,7 +152,7 @@
           <span class="logo-text">Ashes</span>
         </a>
       </div>
-      <div class="theme-circle" id="theme-toggle">
+      <div class="theme-circle" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle theme">
         <i id="theme-icon" class="fas fa-sun"></i>
       </div>
     </header>
@@ -188,9 +195,12 @@
       </div>
       
       <div class="footer-links">
+        <a href="/about/">About</a>
         <a href="/privacy/">Privacy Policy</a>
         <a href="/terms/">Terms of Use</a>
         <a href="/feedback/">Feedback</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/updates.html">What's New</a>
       </div>
       <p class="made-with-love">Made with 💛 by <a href="https://aryantechie.com" target="_blank" rel="noopener">Aryan Techie</a><br class="mobile-break"> &copy; <span id="year"></span> <a href="https://aroice.in" target="_blank" rel="noopener">AROICE</a></p>
     </footer>
@@ -216,10 +226,18 @@
       updateTheme(isDark);
       
       // Toggle theme on click
-      themeToggle.addEventListener('click', () => {
+      const toggleTheme = () => {
         isDark = !isDark;
         updateTheme(isDark);
         localStorage.setItem('ashes-theme', isDark ? 'dark' : 'light');
+      };
+
+      themeToggle.addEventListener('click', toggleTheme);
+      themeToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleTheme();
+        }
       });
     }
       

@@ -246,3 +246,9 @@
     justify-content: center;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .confirmation-icon {
+    animation: none;
+  }
+}

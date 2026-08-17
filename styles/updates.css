@@ -1,0 +1,225 @@
+/* Updates / changelog page specific styles */
+.updates-content {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, rgba(35, 35, 42, 0.85) 0%, rgba(22, 22, 28, 0.92) 100%);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .updates-content {
+    animation: none;
+  }
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.7rem;
+  background: linear-gradient(135deg, #ffb347, #ffcc33);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  background: linear-gradient(90deg, #e6e6e6, #aaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* Release timeline */
+.release-list {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.release-item {
+  position: relative;
+  padding: 0 0 2rem 1.8rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.release-item:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.release-item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid #1a1a1a;
+}
+
+.release-item.is-current::before {
+  background: #ffb347;
+  box-shadow: 0 0 10px rgba(255, 179, 71, 0.6);
+}
+
+.release-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.release-version {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #000;
+  background: #ffb347;
+  padding: 0.15rem 0.7rem;
+  border-radius: 2rem;
+}
+
+.release-codename {
+  font-style: italic;
+  color: #ffcc33;
+}
+
+.release-current-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffb347;
+  border: 1px solid rgba(255, 179, 71, 0.5);
+  border-radius: 2rem;
+  padding: 0.1rem 0.6rem;
+}
+
+.release-date {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+.release-summary {
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.release-changes {
+  margin-left: 1.2rem;
+}
+
+.release-changes li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.release-changes li:last-child {
+  margin-bottom: 0;
+}
+
+.release-footnote {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+}
+
+.release-footnote a {
+  color: #ffb347;
+  text-decoration: none;
+}
+
+.release-footnote a:hover {
+  text-decoration: underline;
+  color: #ffcc33;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 179, 71, 0.8);
+  color: #000;
+  border: none;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  background: rgba(255, 179, 71, 1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .updates-content {
+    padding: 1.5rem;
+    margin: 1.5rem 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .release-date {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}

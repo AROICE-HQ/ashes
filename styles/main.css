@@ -99,6 +99,11 @@ header {
   transform: scale(1.1);
 }
 
+.theme-circle:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
 .theme-circle i {
   font-size: 1rem;
   color: var(--accent-primary);
@@ -283,14 +288,21 @@ footer {
   .hero h1 {
     font-size: 2rem;
   }
-  
+
   .hero-logo {
     width: 4rem;
     height: 4rem;
   }
-  
+
   .footer-links {
     flex-direction: column;
     gap: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo img,
+  .hero-logo {
+    animation: none;
   }
 }

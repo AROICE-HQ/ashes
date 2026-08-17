@@ -1,66 +1,43 @@
-// Theme switching functionality
+// FAQ page specific JavaScript
+// Copyright year and theme toggle are already handled by script.js,
+// which this page also loads — do not duplicate that logic here.
 document.addEventListener('DOMContentLoaded', () => {
-  // Update copyright year
-  const yearElement = document.getElementById('year');
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-  
-  // Theme toggle
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
-  
-  if (themeToggle) {
-    // Check saved preference
-    const savedTheme = localStorage.getItem('ashes-theme');
-    
-    // Check system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Set initial theme
-    let isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
-    updateTheme(isDark);
-    
-    // Toggle theme on click
-    themeToggle.addEventListener('click', () => {
-      isDark = !isDark;
-      updateTheme(isDark);
-      localStorage.setItem('ashes-theme', isDark ? 'dark' : 'light');
-    });
-  }
-  
-  function updateTheme(isDark) {
-    if (isDark) {
-      document.body.classList.remove('theme-light');
-      if (themeIcon) themeIcon.className = 'fas fa-sun';
-    } else {
-      document.body.classList.add('theme-light');
-      if (themeIcon) themeIcon.className = 'fas fa-moon';
-    }
-  }
-  
   // FAQ Accordion functionality
   const faqItems = document.querySelectorAll('.faq-item');
-  
-  faqItems.forEach(item => {
+
+  faqItems.forEach((item, index) => {
     const question = item.querySelector('.faq-question');
-    
-    question.addEventListener('click', () => {
-      // Toggle active class on clicked item
+    const answer = item.querySelector('.faq-answer');
+    const answerId = `faq-answer-${index}`;
+
+    // Accordion triggers are plain divs in the markup; give them the
+    // keyboard/ARIA affordance of a real disclosure button.
+    answer.id = answerId;
+    question.setAttribute('role', 'button');
+    question.setAttribute('tabindex', '0');
+    question.setAttribute('aria-expanded', 'false');
+    question.setAttribute('aria-controls', answerId);
+
+    const toggleItem = () => {
       const isActive = item.classList.contains('active');
-      
+
       // Close all other items
       faqItems.forEach(otherItem => {
         if (otherItem !== item && otherItem.classList.contains('active')) {
           otherItem.classList.remove('active');
+          otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         }
       });
-      
-      // Toggle current item
-      if (isActive) {
-        item.classList.remove('active');
-      } else {
-        item.classList.add('active');
+
+      item.classList.toggle('active', !isActive);
+      question.setAttribute('aria-expanded', String(!isActive));
+    };
+
+    question.addEventListener('click', toggleItem);
+    question.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleItem();
       }
     });
   });
@@ -70,12 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const faqSections = document.querySelectorAll('.faq-section');
   
   categoryButtons.forEach(button => {
+    button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+
     button.addEventListener('click', () => {
       const category = button.getAttribute('data-category');
-      
+
       // Update active button
-      categoryButtons.forEach(btn => btn.classList.remove('active'));
+      categoryButtons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
       button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
       
       // Filter sections
       if (category === 'all') {
@@ -168,8 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Back to top button
   const backToTopButton = document.getElementById('back-to-top');
-  
+
   if (backToTopButton) {
+    backToTopButton.setAttribute('role', 'button');
+    backToTopButton.setAttribute('tabindex', '0');
+    backToTopButton.setAttribute('aria-label', 'Back to top');
+
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
         backToTopButton.classList.add('visible');
@@ -177,12 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
         backToTopButton.classList.remove('visible');
       }
     });
-    
-    backToTopButton.addEventListener('click', () => {
+
+    const scrollToTop = () => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
+    };
+
+    backToTopButton.addEventListener('click', scrollToTop);
+    backToTopButton.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        scrollToTop();
+      }
     });
   }
 });

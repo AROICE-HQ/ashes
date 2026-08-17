@@ -25,10 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTheme(isDark);
     
     // Toggle theme on click
-    themeToggle.addEventListener('click', () => {
+    const toggleTheme = () => {
       isDark = !isDark;
       updateTheme(isDark);
       localStorage.setItem('ashes-theme', isDark ? 'dark' : 'light');
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleTheme();
+      }
     });
   }
     function updateTheme(isDark) {

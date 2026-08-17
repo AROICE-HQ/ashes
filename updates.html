@@ -1,16 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's New - ASHES | AROICE</title>
-    <meta http-equiv="refresh" content="0; url=https://github.com/AROICE-HQ/ashes/releases">
-    <script>
-        window.location.href = "https://github.com/AROICE-HQ/ashes/releases";
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's New - Ashes</title>
+  <meta name="description" content="Every Ashes release, from the first countdown to the latest accuracy and security update.">
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self';">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ashes.aroice.in/updates.html">
+  <meta property="og:title" content="What's New - Ashes">
+  <meta property="og:description" content="Every Ashes release, from the first countdown to the latest accuracy and security update.">
+  <meta property="og:image" content="https://ashes.aroice.in/assets/social-media/og-banner.png">
+  <meta property="og:image:alt" content="Ashes New Tab Extension Banner">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Ashes by AROICE">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://ashes.aroice.in/updates.html">
+  <meta property="twitter:title" content="What's New - Ashes">
+  <meta property="twitter:description" content="Every Ashes release, from the first countdown to the latest accuracy and security update.">
+  <meta property="twitter:image" content="https://ashes.aroice.in/assets/social-media/og-banner.png">
+  <meta property="twitter:creator" content="@aryantechie">
+  <meta property="twitter:site" content="@aryantechie">
+  <meta property="twitter:image:alt" content="Ashes New Tab Extension Banner">
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/updates.css">
+  <link rel="icon" type="image/png" href="assets/logo/icon-32x32.png">
 </head>
 <body>
-    <p>Redirecting to releases page...</p>
-    <p>If you are not redirected automatically, <a href="https://github.com/AROICE-HQ/ashes/releases">click here</a>.</p>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="assets/logo/icon-128x128.png" alt="Ashes Logo">
+        <span class="logo-text">Ashes</span>
+      </div>
+      <div class="theme-circle" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle theme">
+        <i id="theme-icon" class="fas fa-sun"></i>
+      </div>
+    </header>
+
+    <div class="updates-content">
+      <div class="page-header">
+        <h1>What's New</h1>
+        <p class="subtitle">Every release, from the first countdown to today.</p>
+      </div>
+
+      <div class="release-list">
+
+        <article class="release-item is-current">
+          <div class="release-header">
+            <span class="release-version">v2.5.0</span>
+            <span class="release-codename">"Ember"</span>
+            <span class="release-current-badge">Current</span>
+            <time class="release-date" datetime="2026-08-17">August 17, 2026</time>
+          </div>
+          <p class="release-summary">An accuracy and security pass — the calculator now scores exactly what the form asks, and every page is a little harder to break.</p>
+          <ul class="release-changes">
+            <li>Fixed several Life Factors questions that weren't affecting your calculated lifespan</li>
+            <li>Fixed a crash when selecting "Other" for gender</li>
+            <li>More accurate scoring for former smokers vs. current smokers</li>
+            <li>More precise countdown timing</li>
+            <li>Tightened security and privacy protections throughout</li>
+          </ul>
+        </article>
+
+        <article class="release-item">
+          <div class="release-header">
+            <span class="release-version">v2.0.0</span>
+            <span class="release-codename">The Advanced Life Factor Update</span>
+            <time class="release-date" datetime="2025-09-05">September 5, 2025</time>
+          </div>
+          <p class="release-summary">The biggest update yet — a truly personalized, science-informed life expectancy experience.</p>
+          <ul class="release-changes">
+            <li>Advanced life expectancy calculator factoring country, age, gender, BMI, exercise, diet, sleep, stress, and more</li>
+            <li>New Life Factors page to fine-tune 30+ health and lifestyle variables, updating your countdown in real time</li>
+            <li>Guided, step-by-step onboarding</li>
+            <li>Personalized health recommendations based on your profile</li>
+            <li>Keyboard shortcuts now managed directly through Chrome's extension settings</li>
+            <li>Enhanced UI and accessibility, improved mobile support</li>
+            <li>Privacy-first: all data stays 100% local, nothing ever leaves your device</li>
+          </ul>
+        </article>
+
+        <article class="release-item">
+          <div class="release-header">
+            <span class="release-version">v1.3.1</span>
+            <time class="release-date" datetime="2025-06-15">June 15, 2025</time>
+          </div>
+          <ul class="release-changes">
+            <li>Keyboard shortcuts now managed directly through Chrome's extension settings</li>
+            <li>Minor improvements and bug fixes</li>
+          </ul>
+        </article>
+
+        <article class="release-item">
+          <div class="release-header">
+            <span class="release-version">v1.3.0</span>
+            <time class="release-date" datetime="2025-05-27">May 27, 2025</time>
+          </div>
+          <ul class="release-changes">
+            <li>Enhanced user interface</li>
+            <li>Added new customization options</li>
+            <li>Improved performance and reliability</li>
+          </ul>
+        </article>
+
+        <article class="release-item">
+          <div class="release-header">
+            <span class="release-version">v1.2.0</span>
+            <time class="release-date" datetime="2025-05-25">May 25, 2025</time>
+          </div>
+          <ul class="release-changes">
+            <li>Added a dedicated options page</li>
+            <li>New theme and display customization</li>
+            <li>General user experience improvements</li>
+          </ul>
+        </article>
+
+        <article class="release-item">
+          <div class="release-header">
+            <span class="release-version">v1.1.0</span>
+            <time class="release-date" datetime="2023-05-26">May 26, 2023</time>
+          </div>
+          <ul class="release-changes">
+            <li>Live countdown with seconds display</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="release-footnote">
+        <p>Looking for commit-level detail? The full technical changelog lives on <a href="https://github.com/AROICE-HQ/ashes/releases" target="_blank" rel="noopener">GitHub Releases <i class="fas fa-arrow-up-right-from-square"></i></a>.</p>
+      </div>
+
+      <div class="return-link">
+        <a href="/"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      </div>
+    </div>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/Aryan-Techie" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/aryantechie" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/aryantechie" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://youtube.com/@aroice" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="mailto:admin@aroice.in" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Use</a>
+        <a href="/feedback/">Feedback</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/updates.html" class="active">What's New</a>
+      </div>
+      <p class="copyright"></p>
+      <p class="made-with-love">Made with 💛 by <a href="https://aryantechie.com" target="_blank" rel="noopener">Aryan Techie</a> &copy; <span id="year"></span> <a href="https://aroice.in" target="_blank" rel="noopener">AROICE</a></p>
+    </footer>
+  </div>
+  <script src="scripts/script.js"></script>
+  <script src="scripts/updates.js"></script>
+  <script src="scripts/security-headers.js"></script>
 </body>
 </html>

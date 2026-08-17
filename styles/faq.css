@@ -276,6 +276,12 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+.faq-question:focus-visible,
+.back-to-top:focus-visible {
+  outline: 2px solid #ffb347;
+  outline-offset: 2px;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .faq-content {
