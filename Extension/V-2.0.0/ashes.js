@@ -880,45 +880,13 @@ aboutModal.onclick = (e) => {
   if (e.target === aboutModal) aboutModal.classList.remove('active');
 };
 
-// Changelog popup
+// "What's New" opens the real changelog on the website instead of
+// duplicating it in an in-app modal - one changelog to keep in sync, not two.
 const updatesBtn = document.getElementById('updates-btn');
-const updatesModal = document.getElementById('updates-modal');
-const closeUpdatesBtn = document.getElementById('close-updates');
 
 updatesBtn.onclick = () => {
   dropdownMenu.classList.remove('active');
-  updatesModal.classList.add('active');
-};
-
-// Auto-open the changelog once after an update, instead of leaving it as a
-// manual-only menu item. background.js's onInstalled('update') handler
-// already records previousVersion; whatsNewSeenVersion tracks which
-// version's changelog this profile has already been shown, so it opens
-// exactly once per version, not on every new tab after that.
-(function maybeShowWhatsNew() {
-  const currentVersion = chrome.runtime.getManifest().version;
-
-  chrome.storage.local.get(['previousVersion', 'whatsNewSeenVersion'], (result) => {
-    const isFreshUpdate = result.previousVersion && result.previousVersion !== currentVersion;
-    const alreadySeen = result.whatsNewSeenVersion === currentVersion;
-
-    if (isFreshUpdate && !alreadySeen) {
-      updatesModal.classList.add('active');
-      chrome.storage.local.set({ whatsNewSeenVersion: currentVersion });
-    } else if (!result.whatsNewSeenVersion) {
-      // First run ever (fresh install, no previousVersion yet) - mark the
-      // current version seen so a later real update is what triggers this.
-      chrome.storage.local.set({ whatsNewSeenVersion: currentVersion });
-    }
-  });
-})();
-
-closeUpdatesBtn.onclick = () => {
-  updatesModal.classList.remove('active');
-};
-
-updatesModal.onclick = (e) => {
-  if (e.target === updatesModal) updatesModal.classList.remove('active');
+  window.open('https://ashes.aroice.in/updates.html', '_blank');
 };
 
 // Feedback functionality

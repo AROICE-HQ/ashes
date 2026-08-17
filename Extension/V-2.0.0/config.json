@@ -43,7 +43,7 @@
     {
       "version": "2.7.0",
       "codename": "Afterglow",
-      "changes": "Uninstalling now offers a quick, optional feedback survey instead of just disappearing, fixed new-tab countdown text overflowing narrow windows, session stats and an auto-opening changelog added to the About/Updates modals",
+      "changes": "Uninstalling now offers a quick, optional feedback survey instead of just disappearing, fixed new-tab countdown text overflowing narrow windows, session stats added to the About modal, and \"What's New\" now opens the real changelog on the website instead of a separate in-app copy",
       "date": "2026-08-17"
     }
   ]

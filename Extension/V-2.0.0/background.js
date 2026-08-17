@@ -65,8 +65,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       'lastUpdateDate': Date.now(),
       'previousVersion': previousVersion
     });
-    // ashes.js reads previousVersion on load and auto-opens the changelog
-    // modal once per new version - see maybeShowWhatsNew() there.
+    // previousVersion isn't read anywhere yet, kept for future use.
   }
     // Shortcuts are now managed via chrome://extensions/shortcuts
   // No need to load settings for shortcuts

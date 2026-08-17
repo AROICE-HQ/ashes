@@ -313,17 +313,6 @@ body {
   background: var(--accent-secondary);
   color: var(--text-color);
 }
-.update-entry {
-  margin-bottom: 1.5rem;
-}
-.update-entry h3 {
-  color: var(--accent-primary);
-  margin-bottom: 0.5rem;
-}
-.update-entry p {
-  margin: 0.4rem 0;
-}
-
 /* Developer info styles */
 .developer-links {
   margin: 1.2rem 0;  
@@ -371,14 +360,6 @@ body {
 .developer-signature .signature-attribution {
   display: block;
   text-align: right;
-}
-
-.release-notes-link {
-  color: #4DA6FF;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
 }
 
 .clock-only-btn {
