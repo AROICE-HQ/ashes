@@ -1,5 +1,5 @@
 // Background service worker - handles events and communication behind the scenes
-let EXTENSION_VERSION = '2.5.1';
+let EXTENSION_VERSION = '2.7.0';
 const STORAGE_KEY = 'ashes-settings';
 
 // Point Chrome's built-in uninstall survey at our own feedback page instead

@@ -88,7 +88,7 @@ fetch(chrome.runtime.getURL('manifest.json'))
   })
   .catch(error => {
     console.error('Error loading version:', error);
-    versionNumber.textContent = '2.5.1'; // Fallback version
+    versionNumber.textContent = '2.7.0'; // Fallback version
   });
 
 // Load user preferences from storage

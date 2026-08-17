@@ -41,9 +41,9 @@
       "date": "2026-08-17"
     },
     {
-      "version": "2.5.1",
+      "version": "2.7.0",
       "codename": "Afterglow",
-      "changes": "Uninstalling now offers a quick, optional feedback survey instead of just disappearing",
+      "changes": "Uninstalling now offers a quick, optional feedback survey instead of just disappearing, fixed new-tab countdown text overflowing narrow windows, session stats and an auto-opening changelog added to the About/Updates modals",
       "date": "2026-08-17"
     }
   ]
